@@ -1,6 +1,12 @@
 from django.test import TestCase
-from ..serializers import ProcessorSerializer, MotherBoardSerializer, ComputerSerializer
-from ..models import Processor, MotherBoard, Computer
+from ..serializers import (
+    ProcessorSerializer,
+    MotherBoardSerializer,
+    ComputerSerializer,
+    MemorySerializer,
+    VideoCardSerializer,
+)
+from ..models import Processor, MotherBoard, Computer, Memory, VideoCard
 from model_bakery import baker
 
 
@@ -98,4 +104,38 @@ class TestModelMotherBoard(TestCase):
 
 class TestModelComputer(TestCase):
     def setUp(self):
-        pass
+        """
+        Here is a class TestComputer to use in our
+        configurations compatibilities tests.
+        """
+        class TestComputer:
+            def __init__(self, processor, mb, ram, videocard):
+                self.processor = processor
+                self.mb = mb
+                self.ram = ram
+                self.videocard = videocard
+                
+        self.test_computer_1 = TestComputer(
+            processor=Processor(
+                processor_description="Intel Core i5", processor_brand="Intel"
+            ),
+            mb=MotherBoard(
+                motherboard_description="ASUS Prime",
+                supported_processors="Intel",
+                slots_RAM=2,
+                max_RAM_supported=16,
+                integrated_video=False,
+            ),
+            videocard=VideoCard(),
+            ram=[
+                Memory(RAM_description="Hiper X", RAM_size=4),
+                Memory(RAM_description="Hiper X", RAM_size=4),
+            ],
+        )
+        self.bunch_of_computers = baker.make(Computer, _quantity=10, make_m2m=True)
+
+    def test_asus_mb_computer_processor_intel_2_slots_16_max_ram_no_video(self):
+        self.assertEqual(self.test_computer_1.mb.motherboard_description, "ASUS Prime")
+        self.assertIn("Intel", self.test_computer_1.processor.processor_description)
+        self.assertFalse(self.test_computer_1.videocard.video_card_description)
+        self.assertEqual(len(self.test_computer_1.ram), 2)

@@ -1,5 +1,11 @@
 from .models import Processor, MotherBoard, Memory, VideoCard, Computer
-from .serializers import ProcessorSerializer, MotherBoardSerializer, MemorySerializer, VideoCardSerializer, ComputerSerializer
+from .serializers import (
+    ProcessorSerializer,
+    MotherBoardSerializer,
+    MemorySerializer,
+    VideoCardSerializer,
+    ComputerSerializer,
+)
 from rest_framework import generics
 
 
