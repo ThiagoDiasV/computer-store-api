@@ -24,13 +24,13 @@ class MotherBoard(models.Model):
     motherboard_choices = [
         ("ASUS Prime", "Asus Prime"),
         ("Gigabyte", "Gigabyte"),
-        ("ASRock Fatal", "ASRock Fatal")
+        ("ASRock Fatal", "ASRock Fatal"),
     ]
 
     supported_processors_choices = [
         ("Intel", "Intel"),
         ("AMD", "AMD"),
-        ("Hybrid", "Hybrid")
+        ("Hybrid", "Hybrid"),
     ]
 
     slots_RAM_choices = [(2, "2"), (4, "4")]

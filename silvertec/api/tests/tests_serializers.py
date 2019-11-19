@@ -1,6 +1,7 @@
 from django.test import TestCase
 from ..serializers import ProcessorSerializer, MotherBoardSerializer
 from ..models import Processor, MotherBoard
+from model_bakery import baker
 
 
 class TestModelProcessor(TestCase):
