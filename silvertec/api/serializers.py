@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Processor, MotherBoard, Memory, VideoCard, User, Order
+from .models import Processor, MotherBoard, Memory, VideoCard, User, Order, Computer
 from .validations import validate_processor, validate_motherboard
 
 
@@ -33,6 +33,12 @@ class VideoCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = VideoCard
         fields = "__all__"
+
+
+class ComputerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Computer
+        fields = '__all__'
 
 
 class UserSerializer(serializers.ModelSerializer):

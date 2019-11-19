@@ -1,6 +1,6 @@
 from django.test import TestCase
-from ..serializers import ProcessorSerializer, MotherBoardSerializer
-from ..models import Processor, MotherBoard
+from ..serializers import ProcessorSerializer, MotherBoardSerializer, ComputerSerializer
+from ..models import Processor, MotherBoard, Computer
 from model_bakery import baker
 
 
@@ -94,3 +94,8 @@ class TestModelMotherBoard(TestCase):
         self.assertEqual(4, slots_RAM)
         self.assertEqual(64, max_RAM)
         self.assertTrue(integrated_video)
+
+
+class TestModelComputer(TestCase):
+    def setUp(self):
+        pass

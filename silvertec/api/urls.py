@@ -11,7 +11,9 @@ urlpatterns = [
     path('memories/', views.MemoryList.as_view()),
     path('memories/<int:pk>', views.MemoryDetail.as_view()),
     path('videocards/', views.VideoCardList.as_view()),
-    path('videocards/<int:pk>', views.VideoCardDetail)
+    path('videocards/<int:pk>', views.VideoCardDetail.as_view()),
+    path('computers/', views.ComputerList.as_view()),
+    path('computers/<int:pk>', views.ComputerDetail.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

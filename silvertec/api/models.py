@@ -61,7 +61,7 @@ class Memory(models.Model):
     RAM_size = models.PositiveIntegerField(choices=sizes_choices)
 
     def __str__(self):
-        return self.RAM_description
+        return f"{self.RAM_description} {self.RAM_size} GB"
 
 
 class VideoCard(models.Model):
@@ -76,7 +76,7 @@ class VideoCard(models.Model):
     )
 
     def __str__(self):
-        return self.video_card_description
+        return f"{self.video_card_description}"
 
 
 class Computer(models.Model):
