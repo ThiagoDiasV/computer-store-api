@@ -65,13 +65,25 @@ def validate_motherboard(data) -> None:
             )
 
 
-def validate_asus_computer_components(data) -> None:
+def get_serializer_data(data) -> tuple:
+    """
+    Get the serializer data.
+    """
     processor = data["processor_id"]
     graphic_card = data["graphic_card_id"]
     memories = data["memory_id"]
     total_ram = 0
     for memory in memories:
         total_ram += memory.RAM_size
+    return (processor, graphic_card, memories, total_ram)
+
+
+def validate_asus_computer_components(data) -> None:
+    extracted_data = get_serializer_data(data)
+    processor = extracted_data[0]
+    graphic_card = extracted_data[1]
+    memories = extracted_data[2]
+    total_ram = extracted_data[3]
 
     if "AMD" in str(processor):
         raise serializers.ValidationError(
@@ -92,12 +104,11 @@ def validate_asus_computer_components(data) -> None:
 
 
 def validate_gigabyte_computer_components(data) -> None:
-    processor = data["processor_id"]
-    graphic_card = data["graphic_card_id"]
-    memories = data["memory_id"]
-    total_ram = 0
-    for memory in memories:
-        total_ram += memory.RAM_size
+    extracted_data = get_serializer_data(data)
+    processor = extracted_data[0]
+    graphic_card = extracted_data[1]
+    memories = extracted_data[2]
+    total_ram = extracted_data[3]
 
     if "Intel" in str(processor):
         raise serializers.ValidationError(
@@ -118,9 +129,12 @@ def validate_gigabyte_computer_components(data) -> None:
 
 
 def validate_asrock_computer_components(data) -> None:
-    processor = data["processor_id"]
-    graphic_card = data["graphic_card_id"]
-    memories = data["memory_id"]
+    extracted_data = get_serializer_data(data)
+    processor = extracted_data[0]
+    graphic_card = extracted_data[1]
+    memories = extracted_data[2]
+    total_ram = extracted_data[3]
+
     if "Intel" in str(processor):
         raise serializers.ValidationError(
             "Gigabyte Motherboards are only compatible with AMD Processors."
