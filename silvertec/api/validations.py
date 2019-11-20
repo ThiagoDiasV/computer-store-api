@@ -73,5 +73,9 @@ def validate_computers_components(data) -> None:
     if 'ASUS' in str(motherboard):
         if 'AMD' in str(processor):
             raise serializers.ValidationError(
-                "ASUS Motherboards are only compatible with Intel Processors"
+                "ASUS Prime Motherboards are only compatible with Intel Processors"
+            )
+        if len(memories) > 2:
+            raise serializers.ValidationError(
+                "ASUS Prime Motherboards shouldn't have more than 2 memory ram cards"
             )

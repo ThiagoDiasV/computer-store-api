@@ -92,14 +92,23 @@ class TestModelComputer(BaseTestCase):
         computer_serializer = ComputerSerializer(self.gigabyte_computer)
         memory_1_serializer = MemorySerializer(self.ram4gb)
         memory_2_serializer = MemorySerializer(self.ram4gb)
+        memory_3_serializer = MemorySerializer(self.ram4gb)
 
         total_ram = sum(
             (memory_1_serializer.data["RAM_size"], memory_2_serializer.data["RAM_size"])
+        )
+        total_ram_cards = len(
+            (
+                memory_1_serializer,
+                memory_2_serializer,
+                memory_3_serializer
+            )
         )
 
         self.assertIn("AMD", str(computer_serializer.data["processor_id"]))
         self.assertLessEqual(total_ram, 16)
         self.assertTrue(str(computer_serializer.data["video_card_id"]))
+        self.assertGreater(total_ram_cards, 2)
 
     def test_asrock_computer_components(self):
         computer_serializer = ComputerSerializer(self.asrock_computer)
