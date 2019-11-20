@@ -37,9 +37,6 @@ class VideoCardSerializer(serializers.ModelSerializer):
 
 class ComputerSerializer(serializers.ModelSerializer):
     def validate(self, data):
-        from ipdb import set_trace
-
-        set_trace()
         return data
 
     class Meta:

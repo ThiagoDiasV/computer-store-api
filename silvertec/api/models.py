@@ -13,7 +13,9 @@ class Processor(models.Model):
 
     processor_brands_choices = [("Intel", "Intel"), ("AMD", "AMD")]
 
-    processor_description = models.CharField(max_length=30, choices=processor_choices)
+    processor_description = models.CharField(
+        max_length=30, choices=processor_choices, unique=True
+    )
     processor_brand = models.CharField(max_length=10, choices=processor_brands_choices)
 
     def __str__(self):
@@ -38,7 +40,7 @@ class MotherBoard(models.Model):
     max_RAM_supported_choices = [(16, "16 GB"), (64, "64 GB")]
 
     motherboard_description = models.CharField(
-        max_length=30, choices=motherboard_choices
+        max_length=30, choices=motherboard_choices, unique=True
     )
     supported_processors = models.CharField(
         max_length=10, choices=supported_processors_choices
@@ -58,7 +60,7 @@ class Memory(models.Model):
 
     RAM_description = models.CharField(max_length=10, choices=memory_choices)
 
-    RAM_size = models.PositiveIntegerField(choices=sizes_choices)
+    RAM_size = models.PositiveIntegerField(choices=sizes_choices, unique=True)
 
     def __str__(self):
         return f"{self.RAM_description} {self.RAM_size} GB"
@@ -72,7 +74,7 @@ class VideoCard(models.Model):
     ]
 
     video_card_description = models.CharField(
-        max_length=100, choices=video_card_choices
+        max_length=100, choices=video_card_choices, unique=True
     )
 
     def __str__(self):
@@ -83,7 +85,9 @@ class Computer(models.Model):
     processor_id = models.ForeignKey(Processor, on_delete=models.CASCADE)
     motherboard_id = models.ForeignKey(MotherBoard, on_delete=models.CASCADE)
     memory_id = models.ManyToManyField(Memory)
-    video_card_id = models.ForeignKey(VideoCard, on_delete=models.CASCADE)
+    video_card_id = models.ForeignKey(
+        VideoCard, on_delete=models.CASCADE, null=True, blank=False
+    )
 
 
 class Order(models.Model):

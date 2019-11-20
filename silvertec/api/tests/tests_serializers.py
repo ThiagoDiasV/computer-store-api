@@ -1,4 +1,3 @@
-from django.test import TestCase
 from ..serializers import (
     ProcessorSerializer,
     MotherBoardSerializer,
@@ -7,20 +6,13 @@ from ..serializers import (
     VideoCardSerializer,
 )
 from ..models import Processor, MotherBoard, Computer, Memory, VideoCard
-from model_bakery import baker
+from ipdb import set_trace
+from .base_testcase import BaseTestCase
 
 
-class TestModelProcessor(TestCase):
+class TestModelProcessor(BaseTestCase):
     def setUp(self) -> None:
-        self.intel_processor = Processor(
-            processor_description="Intel Core i5", processor_brand="Intel"
-        )
-        self.amd_processor_1 = Processor(
-            processor_description="AMD Ryzen 7", processor_brand="AMD"
-        )
-        self.amd_processor_2 = Processor(
-            processor_description="AMD Athlon", processor_brand="AMD"
-        )
+        super(TestModelProcessor, self).setUp()
 
     def test_if_processor_is_an_Intel_then_AMD_brand_is_not_allowed(self):
         serializer = ProcessorSerializer(self.intel_processor)
@@ -38,29 +30,9 @@ class TestModelProcessor(TestCase):
         self.assertIn("Athlon", result_2)
 
 
-class TestModelMotherBoard(TestCase):
+class TestModelMotherBoard(BaseTestCase):
     def setUp(self) -> None:
-        self.asus_motherboard = MotherBoard(
-            motherboard_description="ASUS Prime",
-            supported_processors="Intel",
-            slots_RAM=2,
-            max_RAM_supported=16,
-            integrated_video=False,
-        )
-        self.gigabyte_motherboard = MotherBoard(
-            motherboard_description="Gigabyte",
-            supported_processors="AMD",
-            slots_RAM=2,
-            max_RAM_supported=16,
-            integrated_video=False,
-        )
-        self.asrock_motherboard = MotherBoard(
-            motherboard_description="ASRock Fatal",
-            supported_processors="Hybrid",
-            slots_RAM=4,
-            max_RAM_supported=64,
-            integrated_video=True,
-        )
+        super(TestModelMotherBoard, self).setUp()
 
     def test_if_ASUS_mb_is_correctly_set(self):
         serializer = MotherBoardSerializer(self.asus_motherboard)
@@ -102,40 +74,45 @@ class TestModelMotherBoard(TestCase):
         self.assertTrue(integrated_video)
 
 
-class TestModelComputer(TestCase):
-    def setUp(self):
-        """
-        Here is a class TestComputer to use in our
-        configurations compatibilities tests.
-        """
-        class TestComputer:
-            def __init__(self, processor, mb, ram, videocard):
-                self.processor = processor
-                self.mb = mb
-                self.ram = ram
-                self.videocard = videocard
-                
-        self.test_computer_1 = TestComputer(
-            processor=Processor(
-                processor_description="Intel Core i5", processor_brand="Intel"
-            ),
-            mb=MotherBoard(
-                motherboard_description="ASUS Prime",
-                supported_processors="Intel",
-                slots_RAM=2,
-                max_RAM_supported=16,
-                integrated_video=False,
-            ),
-            videocard=VideoCard(),
-            ram=[
-                Memory(RAM_description="Hiper X", RAM_size=4),
-                Memory(RAM_description="Hiper X", RAM_size=4),
-            ],
-        )
-        self.bunch_of_computers = baker.make(Computer, _quantity=10, make_m2m=True)
+class TestModelComputer(BaseTestCase):
+    def setUp(self) -> None:
+        super(TestModelComputer, self).setUp()
 
-    def test_asus_mb_computer_processor_intel_2_slots_16_max_ram_no_video(self):
-        self.assertEqual(self.test_computer_1.mb.motherboard_description, "ASUS Prime")
-        self.assertIn("Intel", self.test_computer_1.processor.processor_description)
-        self.assertFalse(self.test_computer_1.videocard.video_card_description)
-        self.assertEqual(len(self.test_computer_1.ram), 2)
+    def test_asus_computer_components(self):
+        computer_serializer = ComputerSerializer(self.asus_computer)
+        memory_1_serializer = MemorySerializer(self.ram8gb)
+        memory_2_serializer = MemorySerializer(self.ram8gb)
+
+        total_ram = sum(
+            (memory_1_serializer.data["RAM_size"], memory_2_serializer.data["RAM_size"])
+        )
+
+        self.assertIn("Intel", str(computer_serializer.data["processor_id"]))
+        self.assertLessEqual(total_ram, 16)
+        self.assertFalse(str(computer_serializer.data['video_card_id']))
+
+    def test_gigabyte_computer_components(self):
+        computer_serializer = ComputerSerializer(self.gigabyte_computer)
+        memory_1_serializer = MemorySerializer(self.ram4gb)
+        memory_2_serializer = MemorySerializer(self.ram4gb)
+
+        total_ram = sum(
+            (memory_1_serializer.data["RAM_size"], memory_2_serializer.data["RAM_size"])
+        )
+
+        self.assertIn("AMD", str(computer_serializer.data["processor_id"]))
+        self.assertLessEqual(total_ram, 16)
+        self.assertFalse(str(computer_serializer.data['video_card_id']))
+
+    def test_asrock_computer_components(self):
+        computer_serializer = ComputerSerializer(self.asrock_computer)
+        memory_1_serializer = MemorySerializer(self.ram32gb)
+        memory_2_serializer = MemorySerializer(self.ram32gb)
+
+        total_ram = sum(
+            (memory_1_serializer.data["RAM_size"], memory_2_serializer.data["RAM_size"])
+        )
+
+        self.assertIn("Intel", str(computer_serializer.data["processor_id"]))
+        self.assertLessEqual(total_ram, 64)
+        self.assertTrue(str(computer_serializer.data['video_card_id']))

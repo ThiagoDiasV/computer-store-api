@@ -9,15 +9,11 @@ def validate_processor(data):
     brand = data["processor_brand"]
     if "Intel" in description and brand == "AMD":
         raise serializers.ValidationError(
-            """
-            Intel processors can't be associated with AMD brand.Please retry.
-            """
+            "Intel processors can't be associated with AMD brand. Retry."
         )
     elif "AMD" in description and brand == "Intel":
         raise serializers.ValidationError(
-            """
-            AMD processors can't be associated with Intel brand. Please retry.
-            """
+            "AMD processors can't be associated with Intel brand. Retry."
         )
 
 
