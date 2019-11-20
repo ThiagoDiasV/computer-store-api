@@ -66,18 +66,70 @@ def validate_motherboard(data) -> None:
 
 
 def validate_asus_computer_components(data) -> None:
-    processor = data['processor_id']
-    graphic_card = data['graphic_card_id']
-    memories = data['memory_id']
-    if 'AMD' in str(processor):
+    processor = data["processor_id"]
+    graphic_card = data["graphic_card_id"]
+    memories = data["memory_id"]
+    total_ram = 0
+    for memory in memories:
+        total_ram += memory.RAM_size
+
+    if "AMD" in str(processor):
         raise serializers.ValidationError(
             "ASUS Prime Motherboards are only compatible with Intel Processors."
         )
     if len(memories) > 2:
         raise serializers.ValidationError(
+            "Computers with ASUS Prime Motherboards shouldn't have more than 2 ram memory cards."
+        )
+    if total_ram > 16:
+        raise serializers.ValidationError(
+            "ASUS Prime Motherboards shouldn't accept more than 16GB ram memory."
+        )
+    if not graphic_card:
+        raise serializers.ValidationError(
+            "Computers with ASUS Prime MotherBoards must have a graphic card associated with it."
+        )
+
+
+def validate_gigabyte_computer_components(data) -> None:
+    processor = data["processor_id"]
+    graphic_card = data["graphic_card_id"]
+    memories = data["memory_id"]
+    total_ram = 0
+    for memory in memories:
+        total_ram += memory.RAM_size
+
+    if "Intel" in str(processor):
+        raise serializers.ValidationError(
+            "Gigabyte Motherboards are only compatible with AMD Processors."
+        )
+    if len(memories) > 2:
+        raise serializers.ValidationError(
+            "Computers with Gigabyte Motherboards shouldn't have more than 2 ram memory cards."
+        )
+    if total_ram > 16:
+        raise serializers.ValidationError(
+            "Gigabyte Motherboards shouldn't accept more than 16GB ram memory."
+        )
+    if not graphic_card:
+        raise serializers.ValidationError(
+            "ASUS Prime MotherBoards must have a graphic card associated with it."
+        )
+
+
+def validate_asrock_computer_components(data) -> None:
+    processor = data["processor_id"]
+    graphic_card = data["graphic_card_id"]
+    memories = data["memory_id"]
+    if "Intel" in str(processor):
+        raise serializers.ValidationError(
+            "Gigabyte Motherboards are only compatible with AMD Processors."
+        )
+    if len(memories) > 2:
+        raise serializers.ValidationError(
             "ASUS Prime Motherboards shouldn't have more than 2 memory ram cards."
         )
-    if not str(graphic_card):
+    if not graphic_card:
         raise serializers.ValidationError(
             "ASUS Prime MotherBoards must have a graphic card associated with it."
         )

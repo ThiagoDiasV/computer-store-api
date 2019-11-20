@@ -98,11 +98,7 @@ class TestModelComputer(BaseTestCase):
             (memory_1_serializer.data["RAM_size"], memory_2_serializer.data["RAM_size"])
         )
         total_ram_cards = len(
-            (
-                memory_1_serializer,
-                memory_2_serializer,
-                memory_3_serializer
-            )
+            (memory_1_serializer, memory_2_serializer, memory_3_serializer)
         )
 
         self.assertIn("AMD", str(computer_serializer.data["processor_id"]))

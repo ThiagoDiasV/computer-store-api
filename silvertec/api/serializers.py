@@ -1,7 +1,11 @@
 from rest_framework import serializers
 from .models import Processor, MotherBoard, Memory, GraphicCard, User, Order, Computer
 from .validations import (
-    validate_processor, validate_motherboard, validate_asus_computer_components
+    validate_processor,
+    validate_motherboard,
+    validate_asus_computer_components,
+    validate_gigabyte_computer_components,
+    validate_asrock_computer_components
 )
 
 
@@ -39,7 +43,12 @@ class GraphicCardSerializer(serializers.ModelSerializer):
 
 class ComputerSerializer(serializers.ModelSerializer):
     def validate(self, data):
-        validate_asus_computer_components(data)
+        if 'ASUS' in str(data['motherboard_id']):
+            validate_asus_computer_components(data)
+        elif 'Gigabyte' in str(data['motherboard_id']):
+            validate_gigabyte_computer_components(data)
+        elif 'ASRock' in str(data['motherboard_id']):
+            validate_asrock_computer_components(data)
         return data
 
     class Meta:

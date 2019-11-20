@@ -83,3 +83,6 @@ class BaseTestCase(TestCase):
         self.asrock_computer = Computer(
             3, self.intel_processor_1, self.asrock_motherboard, GraphicCard()
         )
+        self.erroneous_asus_computer = Computer(
+            4, self.intel_processor_1, self.asus_motherboard, GraphicCard()
+        )
