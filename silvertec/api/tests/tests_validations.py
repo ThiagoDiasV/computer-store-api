@@ -1,5 +1,5 @@
 from .base_testcase import BaseTestCase
-from ..validations import validate_processor, validate_motherboard, validate_computer_components
+from ..validations import validate_processor, validate_motherboard, validate_asus_computer_components
 from ..serializers import (
     ProcessorSerializer,
     MotherBoardSerializer,
@@ -10,6 +10,9 @@ from rest_framework.serializers import ValidationError
 
 
 class TestProcessorValidationFunction(BaseTestCase):
+    """
+    Test class to validate the validate_processor function.
+    """
     def setUp(self):
         super(TestProcessorValidationFunction, self).setUp()
 
@@ -21,6 +24,9 @@ class TestProcessorValidationFunction(BaseTestCase):
 
 
 class TestMotherBoardValidationFunction(BaseTestCase):
+    """
+    Test class to validate the validate_motherboard function.
+    """
     def setUp(self):
         super(TestMotherBoardValidationFunction, self).setUp()
 

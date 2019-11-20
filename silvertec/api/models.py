@@ -47,7 +47,7 @@ class MotherBoard(models.Model):
     )
     slots_RAM = models.PositiveIntegerField(choices=slots_RAM_choices)
     max_RAM_supported = models.PositiveIntegerField(choices=max_RAM_supported_choices)
-    integrated_video = models.BooleanField()
+    integrated_graphic = models.BooleanField()
 
     def __str__(self):
         return f"{self.motherboard_description}"
@@ -66,27 +66,27 @@ class Memory(models.Model):
         return f"{self.RAM_description} {self.RAM_size} GB"
 
 
-class VideoCard(models.Model):
-    video_card_choices = [
+class GraphicCard(models.Model):
+    graphic_card_choices = [
         ("Gigabyte Geforce GTX 1060 6GB", "Gigabyte Geforce GTX 1060 6GB"),
         ("PNY RTX 2060 6GB", "PNY RTX 2060 6GB"),
         ("Radeon RX 580 8GB", "Radeon RX 580 8GB"),
     ]
 
-    video_card_description = models.CharField(
-        max_length=100, choices=video_card_choices, unique=True
+    graphic_card_description = models.CharField(
+        max_length=100, choices=graphic_card_choices, unique=True
     )
 
     def __str__(self):
-        return f"{self.video_card_description}"
+        return f"{self.graphic_card_description}"
 
 
 class Computer(models.Model):
     processor_id = models.ForeignKey(Processor, on_delete=models.CASCADE)
     motherboard_id = models.ForeignKey(MotherBoard, on_delete=models.CASCADE)
     memory_id = models.ManyToManyField(Memory)
-    video_card_id = models.ForeignKey(
-        VideoCard, on_delete=models.CASCADE, null=True, blank=False
+    graphic_card_id = models.ForeignKey(
+        GraphicCard, on_delete=models.CASCADE, null=True, blank=False
     )
 
 

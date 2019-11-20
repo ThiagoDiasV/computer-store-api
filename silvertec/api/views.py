@@ -1,9 +1,9 @@
-from .models import Processor, MotherBoard, Memory, VideoCard, Computer
+from .models import Processor, MotherBoard, Memory, GraphicCard, Computer
 from .serializers import (
     ProcessorSerializer,
     MotherBoardSerializer,
     MemorySerializer,
-    VideoCardSerializer,
+    GraphicCardSerializer,
     ComputerSerializer,
 )
 from rest_framework import generics
@@ -39,14 +39,14 @@ class MemoryDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MemorySerializer
 
 
-class VideoCardList(generics.ListCreateAPIView):
-    queryset = VideoCard.objects.all()
-    serializer_class = VideoCardSerializer
+class GraphicCardList(generics.ListCreateAPIView):
+    queryset = GraphicCard.objects.all()
+    serializer_class = GraphicCardSerializer
 
 
-class VideoCardDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = VideoCard.objects.all()
-    serializer_class = VideoCardSerializer
+class GraphicCardDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = GraphicCard.objects.all()
+    serializer_class = GraphicCardSerializer
 
 
 class ComputerList(generics.ListCreateAPIView):
