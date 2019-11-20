@@ -12,7 +12,7 @@ class TestModelProcessor(BaseTestCase):
         super(TestModelProcessor, self).setUp()
 
     def test_if_processor_is_an_Intel_then_AMD_brand_is_not_allowed(self):
-        serializer = ProcessorSerializer(self.intel_processor)
+        serializer = ProcessorSerializer(self.intel_processor_1)
         description = serializer.data["processor_description"]
         brand = serializer.data["processor_brand"]
         self.assertIn("Intel", description)

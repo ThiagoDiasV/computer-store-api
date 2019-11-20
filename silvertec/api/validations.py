@@ -65,7 +65,7 @@ def validate_motherboard(data) -> None:
             )
 
 
-def validate_computers_components(data) -> None:
+def validate_computer_components(data) -> None:
     motherboard = data['motherboard_id']
     processor = data['processor_id']
     video_card = data['video_card_id']
