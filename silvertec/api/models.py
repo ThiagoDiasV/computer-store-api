@@ -60,7 +60,7 @@ class Memory(models.Model):
 
     RAM_description = models.CharField(max_length=10, choices=memory_choices)
 
-    RAM_size = models.PositiveIntegerField(choices=sizes_choices, unique=True)
+    RAM_size = models.PositiveIntegerField(choices=sizes_choices)
 
     def __str__(self):
         return f"{self.RAM_description} {self.RAM_size} GB"
