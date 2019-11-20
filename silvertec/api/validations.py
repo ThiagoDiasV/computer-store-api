@@ -65,85 +65,89 @@ def validate_motherboard(data) -> None:
             )
 
 
-def get_serializer_data(data) -> tuple:
+def list_computer_configurations() -> dict:
     """
-    Get the serializer data.
+    List expected configuration of each motherboard brand.
+    The computer_config format is like this:
+    {
+        'motherboard brand' : [
+            'supported processor brand',
+            'ram memory slots',
+            'max ram memory accepted',
+            'integrated graphics'
+        ]
+    }
+    """
+    computer_config = {
+        "ASUS": ["Intel", 2, 16, False],
+        "Gigabyte": ["AMD", 2, 16, False],
+        "ASRock": ["Hybrid", 4, 64, True],
+    }
+    return computer_config
+
+
+def prepare_data_to_computer_build_validation(data) -> list:
+    """
+    Get serialized data and returns computer data prepared to validation.
     """
     processor = data["processor_id"]
-    graphic_card = data["graphic_card_id"]
     memories = data["memory_id"]
+    memories_quantity = len(memories)
     total_ram = 0
     for memory in memories:
         total_ram += memory.RAM_size
-    return (processor, graphic_card, memories, total_ram)
+    has_graphic_card = bool(str(data["graphic_card_id"]))
+    return [str(processor), memories_quantity, total_ram, has_graphic_card]
 
 
-def validate_asus_computer_components(data) -> None:
-    extracted_data = get_serializer_data(data)
-    processor = extracted_data[0]
-    graphic_card = extracted_data[1]
-    memories = extracted_data[2]
-    total_ram = extracted_data[3]
-
-    if "AMD" in str(processor):
-        raise serializers.ValidationError(
-            "ASUS Prime Motherboards are only compatible with Intel Processors."
-        )
-    if len(memories) > 2:
-        raise serializers.ValidationError(
-            "Computers with ASUS Prime Motherboards shouldn't have more than 2 ram memory cards."
-        )
-    if total_ram > 16:
-        raise serializers.ValidationError(
-            "ASUS Prime Motherboards shouldn't accept more than 16GB ram memory."
-        )
-    if not graphic_card:
-        raise serializers.ValidationError(
-            "Computers with ASUS Prime MotherBoards must have a graphic card associated with it."
-        )
-
-
-def validate_gigabyte_computer_components(data) -> None:
-    extracted_data = get_serializer_data(data)
-    processor = extracted_data[0]
-    graphic_card = extracted_data[1]
-    memories = extracted_data[2]
-    total_ram = extracted_data[3]
-
-    if "Intel" in str(processor):
-        raise serializers.ValidationError(
-            "Gigabyte Motherboards are only compatible with AMD Processors."
-        )
-    if len(memories) > 2:
-        raise serializers.ValidationError(
-            "Computers with Gigabyte Motherboards shouldn't have more than 2 ram memory cards."
-        )
-    if total_ram > 16:
-        raise serializers.ValidationError(
-            "Gigabyte Motherboards shouldn't accept more than 16GB ram memory."
-        )
-    if not graphic_card:
-        raise serializers.ValidationError(
-            "ASUS Prime MotherBoards must have a graphic card associated with it."
-        )
-
-
-def validate_asrock_computer_components(data) -> None:
-    extracted_data = get_serializer_data(data)
-    processor = extracted_data[0]
-    graphic_card = extracted_data[1]
-    memories = extracted_data[2]
-    total_ram = extracted_data[3]
-
-    if "Intel" in str(processor):
-        raise serializers.ValidationError(
-            "Gigabyte Motherboards are only compatible with AMD Processors."
-        )
-    if len(memories) > 2:
-        raise serializers.ValidationError(
-            "ASUS Prime Motherboards shouldn't have more than 2 memory ram cards."
-        )
-    if not graphic_card:
-        raise serializers.ValidationError(
-            "ASUS Prime MotherBoards must have a graphic card associated with it."
-        )
+def validate_computer_components(data) -> None:
+    """
+    Validate computer build.
+    The logic of this function is an interation through expected data
+    and recepcted data. The iteration compares selected processor with
+    expected processor, the amount of ram memory cards selected and the
+    total of ram memory selected with expected values and if is
+    expected to select a graphic card or no.
+    If the motherboard is ASRock Fatal, which accepts Intel or AMD
+    processors, it's made a change to string 'hybrid' to expected
+    processor and another change in boolean value, which represents
+    the graphic card, to pass the last validation condition.
+    """
+    allowed_computer_config_dict = list_computer_configurations()
+    config_to_validate = prepare_data_to_computer_build_validation(data)
+    motherboard_brand = str(data["motherboard_id"])
+    
+    for mb_brand, config in allowed_computer_config_dict.items():
+        if mb_brand in motherboard_brand:
+            allowed_hardware = config
+    if motherboard_brand == "ASRock Fatal":
+        allowed_hardware[0] = config_to_validate[0]
+        config_to_validate[-1] = not config_to_validate[-1]
+    for index, selected_hardware in enumerate(config_to_validate):
+        if isinstance(selected_hardware, str):
+            if not allowed_hardware[index] in selected_hardware:
+                raise serializers.ValidationError(
+                    f"{motherboard_brand} Motherboards are only compatible with "
+                    f"{allowed_hardware[index]} Processors. "
+                    f"You selected an {selected_hardware} processor."
+                )
+        elif index == 1:
+            if selected_hardware > allowed_hardware[index]:
+                raise serializers.ValidationError(
+                    f"Computers with {motherboard_brand} motherboard shouldn't have more "
+                    f"than {allowed_hardware[index]} ram memory cards. "
+                    f"You selected {selected_hardware} memory cards."
+                )
+        elif index == 2:
+            if selected_hardware > allowed_hardware[index]:
+                raise serializers.ValidationError(
+                    f"{motherboard_brand} motherboard can't accept more than "
+                    f"{allowed_hardware[index]}GB ram memory. "
+                    f"You selected a total of {selected_hardware}GB ram memory."
+                )
+        elif isinstance(selected_hardware, bool):
+            if selected_hardware == allowed_hardware[index]:
+                raise serializers.ValidationError(
+                    f"Computers with {motherboard_brand} motherboard must have "
+                    "a graphic card associated with it. Pick one."
+                )

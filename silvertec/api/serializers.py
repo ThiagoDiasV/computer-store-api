@@ -3,9 +3,7 @@ from .models import Processor, MotherBoard, Memory, GraphicCard, User, Order, Co
 from .validations import (
     validate_processor,
     validate_motherboard,
-    validate_asus_computer_components,
-    validate_gigabyte_computer_components,
-    validate_asrock_computer_components
+    validate_computer_components,
 )
 
 
@@ -43,11 +41,11 @@ class GraphicCardSerializer(serializers.ModelSerializer):
 
 class ComputerSerializer(serializers.ModelSerializer):
     def validate(self, data):
-        if 'ASUS' in str(data['motherboard_id']):
+        if "ASUS" in str(data["motherboard_id"]):
             validate_asus_computer_components(data)
-        elif 'Gigabyte' in str(data['motherboard_id']):
+        elif "Gigabyte" in str(data["motherboard_id"]):
             validate_gigabyte_computer_components(data)
-        elif 'ASRock' in str(data['motherboard_id']):
+        elif "ASRock" in str(data["motherboard_id"]):
             validate_asrock_computer_components(data)
         return data
 

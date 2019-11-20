@@ -2,7 +2,7 @@ from .base_testcase import BaseTestCase
 from ..validations import (
     validate_processor,
     validate_motherboard,
-    validate_asus_computer_components,
+    validate_computer_components,
 )
 from ..serializers import (
     ProcessorSerializer,
@@ -53,17 +53,42 @@ class TestComputerValidationsFunctions(BaseTestCase):
     def setUp(self):
         super(TestComputerValidationsFunctions, self).setUp()
 
-    def test_asus_mb_computer_validation_function(self):
-        erroneous_computer_serializer = ComputerSerializer(self.erroneous_asus_computer)
+    def test_computer_validation_function(self):
+        wrong_asus_computer_serializer = ComputerSerializer(
+            self.erroneous_asus_computer
+        )
+        wrong_gigabyte_computer_serializer = ComputerSerializer(
+            self.erroneous_gigabyte_computer
+        )
+        wrong_asrock_computer_serializer = ComputerSerializer(
+            self.erroneous_asrock_computer
+        )
         memory_1 = self.ram8gb
         memory_2 = self.ram8gb
-        memory_3 = self.ram8gb
-        list_of_memories = [memory_1, memory_2, memory_3]
+        memory_3 = self.ram16gb
+        memory_4 = self.ram32gb
+        memory_5 = self.ram64gb
+        list_of_memories = [memory_1, memory_2, memory_3, memory_4, memory_5]
 
-        for memory in list_of_memories:
-            erroneous_computer_serializer.data["memory_id"].append(memory)
+        for memory in list_of_memories[:2]:
+            wrong_asus_computer_serializer.data["memory_id"].append(memory)
+        for memory in list_of_memories[:3]:
+            wrong_gigabyte_computer_serializer.data["memory_id"].append(memory)
+        for memory in list_of_memories[:5]:
+            wrong_asrock_computer_serializer.data["memory_id"].append(memory)
+
         self.assertRaises(
             ValidationError,
-            validate_asus_computer_components,
-            erroneous_computer_serializer.data,
+            validate_computer_components,
+            wrong_asus_computer_serializer.data,
+        )
+        self.assertRaises(
+            ValidationError,
+            validate_computer_components,
+            wrong_gigabyte_computer_serializer.data,
+        )
+        self.assertRaises(
+            ValidationError,
+            validate_computer_components,
+            wrong_asrock_computer_serializer.data,
         )
