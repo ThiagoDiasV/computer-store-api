@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 
-def validate_processor(data):
+def validate_processor(data) -> None:
     """
     Validate processor specifications.
     """
@@ -17,7 +17,7 @@ def validate_processor(data):
         )
 
 
-def validate_motherboard(data):
+def validate_motherboard(data) -> None:
     """
     Validate motherboard specifications.
     """
@@ -62,4 +62,16 @@ def validate_motherboard(data):
             raise serializers.ValidationError(
                 "You selected incorrect configuration. Please try again."
                 f"Error message: {possible_error_message}"
+            )
+
+
+def validate_computers_components(data) -> None:
+    motherboard = data['motherboard_id']
+    processor = data['processor_id']
+    video_card = data['video_card_id']
+    memories = data['memory_id']
+    if 'ASUS' in str(motherboard):
+        if 'AMD' in str(processor):
+            raise serializers.ValidationError(
+                "ASUS Motherboards are only compatible with Intel Processors"
             )

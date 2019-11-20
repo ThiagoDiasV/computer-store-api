@@ -3,10 +3,7 @@ from ..serializers import (
     MotherBoardSerializer,
     ComputerSerializer,
     MemorySerializer,
-    VideoCardSerializer,
 )
-from ..models import Processor, MotherBoard, Computer, Memory, VideoCard
-from ipdb import set_trace
 from .base_testcase import BaseTestCase
 
 
@@ -89,7 +86,7 @@ class TestModelComputer(BaseTestCase):
 
         self.assertIn("Intel", str(computer_serializer.data["processor_id"]))
         self.assertLessEqual(total_ram, 16)
-        self.assertFalse(str(computer_serializer.data['video_card_id']))
+        self.assertTrue(str(computer_serializer.data["video_card_id"]))
 
     def test_gigabyte_computer_components(self):
         computer_serializer = ComputerSerializer(self.gigabyte_computer)
@@ -102,7 +99,7 @@ class TestModelComputer(BaseTestCase):
 
         self.assertIn("AMD", str(computer_serializer.data["processor_id"]))
         self.assertLessEqual(total_ram, 16)
-        self.assertFalse(str(computer_serializer.data['video_card_id']))
+        self.assertTrue(str(computer_serializer.data["video_card_id"]))
 
     def test_asrock_computer_components(self):
         computer_serializer = ComputerSerializer(self.asrock_computer)
@@ -115,4 +112,4 @@ class TestModelComputer(BaseTestCase):
 
         self.assertIn("Intel", str(computer_serializer.data["processor_id"]))
         self.assertLessEqual(total_ram, 64)
-        self.assertTrue(str(computer_serializer.data['video_card_id']))
+        self.assertFalse(str(computer_serializer.data["video_card_id"]))

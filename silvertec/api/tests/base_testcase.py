@@ -45,11 +45,11 @@ class BaseTestCase(TestCase):
         self.pnyrtx_video_card = VideoCard(video_card_description="PNY RTX 2060 6GB")
         self.radeonrx_video_card = VideoCard(video_card_description="Radeon RX 580 8GB")
         self.asus_computer = Computer(
-            1, self.intel_processor, self.asus_motherboard, VideoCard()
+            1, self.intel_processor, self.asus_motherboard, self.geforce_video_card
         )
         self.gigabyte_computer = Computer(
-            2, self.amd_processor_1, self.gigabyte_motherboard, VideoCard()
+            2, self.amd_processor_1, self.gigabyte_motherboard, self.pnyrtx_video_card
         )
         self.asrock_computer = Computer(
-            3, self.intel_processor, self.asrock_motherboard, self.geforce_video_card
+            3, self.intel_processor, self.asrock_motherboard, VideoCard()
         )
