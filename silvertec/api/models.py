@@ -14,7 +14,7 @@ class Processor(models.Model):
     processor_brands_choices = [("Intel", "Intel"), ("AMD", "AMD")]
 
     processor_description = models.CharField(
-        max_length=30, choices=processor_choices, unique=True
+        max_length=30, choices=processor_choices
     )
     processor_brand = models.CharField(max_length=10, choices=processor_brands_choices)
 
@@ -40,7 +40,7 @@ class MotherBoard(models.Model):
     max_ram_supported_choices = [(16, "16 GB"), (64, "64 GB")]
 
     motherboard_description = models.CharField(
-        max_length=30, choices=motherboard_choices, unique=True
+        max_length=30, choices=motherboard_choices
     )
     supported_processors = models.CharField(
         max_length=10, choices=supported_processors_choices
@@ -74,7 +74,7 @@ class GraphicCard(models.Model):
     ]
 
     graphic_card_description = models.CharField(
-        max_length=100, choices=graphic_card_choices, unique=True
+        max_length=100, choices=graphic_card_choices
     )
 
     def __str__(self):
