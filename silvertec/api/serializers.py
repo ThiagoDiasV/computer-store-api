@@ -10,7 +10,7 @@ from .validations import (
 )
 
 
-class ProcessorSerializer(serializers.ModelSerializer):
+class ProcessorSerializer(serializers.HyperlinkedModelSerializer):
     def validate(self, data):
         validate_processor(data)
         return data
@@ -20,7 +20,7 @@ class ProcessorSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class MotherBoardSerializer(serializers.ModelSerializer):
+class MotherBoardSerializer(serializers.HyperlinkedModelSerializer):
     def validate(self, data):
         validate_motherboard(data)
         return data
@@ -30,19 +30,19 @@ class MotherBoardSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class MemorySerializer(serializers.ModelSerializer):
+class MemorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Memory
         fields = "__all__"
 
 
-class GraphicCardSerializer(serializers.ModelSerializer):
+class GraphicCardSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = GraphicCard
         fields = "__all__"
 
 
-class ComputerSerializer(serializers.ModelSerializer):
+class ComputerSerializer(serializers.HyperlinkedModelSerializer):
     def validate(self, data):
         validate_processor_compatibility_with_motherboard(data)
         validate_memory_cards_and_motherboard_ram_slots(data)
@@ -55,14 +55,14 @@ class ComputerSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'password')
+        fields = ('username', )
         user_id = serializers.ReadOnlyField(source='user_id.username')
 
 
-class OrderSerializer(serializers.ModelSerializer):
+class OrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Order
         fields = "__all__"

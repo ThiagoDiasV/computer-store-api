@@ -11,85 +11,53 @@ from .serializers import (
     UserSerializer,
     OrderSerializer
 )
-from rest_framework import generics, permissions
+from rest_framework import permissions, viewsets
 
 
-class ProcessorList(generics.ListCreateAPIView):
+class ProcessorViewSet(viewsets.ModelViewSet):
     queryset = Processor.objects.all()
     serializer_class = ProcessorSerializer
+    filter_fields = '__all__'
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class ProcessorDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Processor.objects.all()
-    serializer_class = ProcessorSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-
-class MotherBoardList(generics.ListCreateAPIView):
+class MotherBoardViewSet(viewsets.ModelViewSet):
     queryset = MotherBoard.objects.all()
     serializer_class = MotherBoardSerializer
+    filter_fields = '__all__'
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class MotherBoardDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = MotherBoard.objects.all()
-    serializer_class = MotherBoardSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-
-class MemoryList(generics.ListCreateAPIView):
+class MemoryViewSet(viewsets.ModelViewSet):
     queryset = Memory.objects.all()
     serializer_class = MemorySerializer
+    filter_fields = '__all__'
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class MemoryDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Memory.objects.all()
-    serializer_class = MemorySerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-
-class GraphicCardList(generics.ListCreateAPIView):
+class GraphicCardViewSet(viewsets.ModelViewSet):
     queryset = GraphicCard.objects.all()
     serializer_class = GraphicCardSerializer
+    filter_fields = '__all__'
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class GraphicCardDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = GraphicCard.objects.all()
-    serializer_class = GraphicCardSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-
-class ComputerList(generics.ListCreateAPIView):
+class ComputerViewSet(viewsets.ModelViewSet):
     queryset = Computer.objects.all()
     serializer_class = ComputerSerializer
+    filter_fields = '__all__'
 
 
-class ComputerDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Computer.objects.all()
-    serializer_class = ComputerSerializer
-
-
-class OrderList(generics.ListCreateAPIView):
+class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    filter_fields = '__all__'
 
-    def perform_create(self, serializer):
-        serializer.save(user_id=self.request.user)
-
-
-class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+    '''def perform_create(self, serializer):
+        serializer.save(user_id=self.request.user)'''
 
 
-class UserList(generics.ListCreateAPIView):
+class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-
-class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    filter_fields = '__all__'
