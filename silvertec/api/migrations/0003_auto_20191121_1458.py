@@ -29,8 +29,7 @@ def create_motherboards(apps, schema_editor):
         integrated_graphic=True,
     )
     motherboards_list = [m1, m2, m3]
-    for motherboard in motherboards_list:
-        motherboard.save()
+    [motherboard.save() for motherboard in motherboards_list]
 
 
 class Migration(migrations.Migration):

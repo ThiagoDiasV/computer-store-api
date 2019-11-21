@@ -17,9 +17,7 @@ def create_memories(apps, schema_editor):
     ram10 = Memory(10, ram_description="Hiper X", ram_size=64)
 
     memories_list = [ram1, ram2, ram3, ram4, ram5, ram6, ram7, ram8, ram9, ram10]
-
-    for memory in memories_list:
-        memory.save()
+    [memory.save() for memory in memories_list]
 
 
 class Migration(migrations.Migration):
