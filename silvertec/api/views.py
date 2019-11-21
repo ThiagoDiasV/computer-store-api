@@ -1,10 +1,12 @@
-from .models import Processor, MotherBoard, Memory, GraphicCard, Computer
+from .models import Processor, MotherBoard, Memory, GraphicCard, Computer, Order, User
 from .serializers import (
     ProcessorSerializer,
     MotherBoardSerializer,
     MemorySerializer,
     GraphicCardSerializer,
     ComputerSerializer,
+    UserSerializer,
+    OrderSerializer
 )
 from rest_framework import generics
 
@@ -57,3 +59,23 @@ class ComputerList(generics.ListCreateAPIView):
 class ComputerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Computer.objects.all()
     serializer_class = ComputerSerializer
+
+
+class OrderList(generics.ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
+class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
+class UserList(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
