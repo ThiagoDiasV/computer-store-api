@@ -5,31 +5,31 @@ from django.db import migrations
 
 def create_motherboards(apps, schema_editor):
     MotherBoard = apps.get_model("api", "MotherBoard")
-    m1 = MotherBoard(
+    [
+        MotherBoard(
         1,
         motherboard_description="ASUS Prime",
         supported_processors="Intel",
         slots_ram=2,
         max_ram_supported=16,
         integrated_graphic=False,
-    )
-    m2 = MotherBoard(
-        2,
-        motherboard_description="Gigabyte",
-        supported_processors="AMD",
-        slots_ram=2,
-        max_ram_supported=16,
-        integrated_graphic=False,
-    )
-    m3 = MotherBoard(
-        motherboard_description="ASRock Fatal",
-        supported_processors="Hybrid",
-        slots_ram=4,
-        max_ram_supported=64,
-        integrated_graphic=True,
-    )
-    motherboards_list = [m1, m2, m3]
-    [motherboard.save() for motherboard in motherboards_list]
+        ).save(),
+        MotherBoard(
+            2,
+            motherboard_description="Gigabyte",
+            supported_processors="AMD",
+            slots_ram=2,
+            max_ram_supported=16,
+            integrated_graphic=False,
+        ).save(),
+        MotherBoard(
+            motherboard_description="ASRock Fatal",
+            supported_processors="Hybrid",
+            slots_ram=4,
+            max_ram_supported=64,
+            integrated_graphic=True,
+        ).save()
+    ]
 
 
 class Migration(migrations.Migration):

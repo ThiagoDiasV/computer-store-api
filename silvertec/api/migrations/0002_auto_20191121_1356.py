@@ -8,12 +8,12 @@ def create_processors(apps, schema_editor):
     Creates processors to populate database.
     """
     Processor = apps.get_model("api", "Processor")
-    p1 = Processor(1, processor_description="Intel Core i5", processor_brand="Intel")
-    p2 = Processor(2, processor_description="Intel Core i7", processor_brand="Intel")
-    p3 = Processor(3, processor_description="AMD Ryzen 7", processor_brand="AMD")
-    p4 = Processor(4, processor_description="AMD Athlon", processor_brand="AMD")
-    processors_list = [p1, p2, p3, p4]
-    [processor.save() for processor in processors_list]
+    [    
+        Processor(1, processor_description="Intel Core i5", processor_brand="Intel").save(),
+        Processor(2, processor_description="Intel Core i7", processor_brand="Intel").save(),
+        Processor(3, processor_description="AMD Ryzen 7", processor_brand="AMD").save(),
+        Processor(4, processor_description="AMD Athlon", processor_brand="AMD").save()
+    ]
 
 
 class Migration(migrations.Migration):

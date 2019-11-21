@@ -5,11 +5,11 @@ from django.db import migrations
 
 def create_graphic_cards(apps, schema_editor):
     GraphicCard = apps.get_model("api", "GraphicCard")
-    gc1 = GraphicCard(1, graphic_card_description="Gigabyte Geforce GTX 1060 6GB")
-    gc2 = GraphicCard(2, graphic_card_description="PNY RTX 2060 6GB")
-    gc3 = GraphicCard(3, graphic_card_description="Radeon RX 580 8GB")
-    graphic_cards_list = [gc1, gc2, gc3]
-    [graphic_card.save() for graphic_card in graphic_cards_list]
+    [
+        GraphicCard(1, graphic_card_description="Gigabyte Geforce GTX 1060 6GB").save(),
+        GraphicCard(2, graphic_card_description="PNY RTX 2060 6GB").save(),
+        GraphicCard(3, graphic_card_description="Radeon RX 580 8GB").save()
+    ]
 
 
 class Migration(migrations.Migration):
@@ -18,4 +18,6 @@ class Migration(migrations.Migration):
         ("api", "0004_auto_20191121_1502"),
     ]
 
-    operations = [migrations.RunPython(create_graphic_cards)]
+    operations = [
+        migrations.RunPython(create_graphic_cards)
+    ]
