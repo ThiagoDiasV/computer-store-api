@@ -59,6 +59,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'password')
+        user_id = serializers.ReadOnlyField(source='user_id.username')
 
 
 class OrderSerializer(serializers.ModelSerializer):
