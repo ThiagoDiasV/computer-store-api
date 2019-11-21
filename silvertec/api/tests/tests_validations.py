@@ -2,13 +2,14 @@ from .base_testcase import BaseTestCase
 from ..validations import (
     validate_processor,
     validate_motherboard,
-    validate_computer_components,
+    validate_processor_compatibility_with_motherboard,
+    validate_memory_cards_and_motherboard_ram_slots
 )
 from ..serializers import (
     ProcessorSerializer,
     MotherBoardSerializer,
     ComputerSerializer,
-    MemorySerializer,
+    MemorySerializer
 )
 from rest_framework.serializers import ValidationError
 
@@ -53,42 +54,44 @@ class TestComputerValidationsFunctions(BaseTestCase):
     def setUp(self):
         super(TestComputerValidationsFunctions, self).setUp()
 
-    def test_computer_validation_function(self):
-        wrong_asus_computer_serializer = ComputerSerializer(
-            self.erroneous_asus_computer
-        )
-        wrong_gigabyte_computer_serializer = ComputerSerializer(
-            self.erroneous_gigabyte_computer
-        )
-        wrong_asrock_computer_serializer = ComputerSerializer(
-            self.erroneous_asrock_computer
-        )
-        memory_1 = self.ram8gb
-        memory_2 = self.ram8gb
-        memory_3 = self.ram16gb
-        memory_4 = self.ram32gb
-        memory_5 = self.ram64gb
-        list_of_memories = [memory_1, memory_2, memory_3, memory_4, memory_5]
-
-        for memory in list_of_memories[:2]:
-            wrong_asus_computer_serializer.data["memory_id"].append(memory)
-        for memory in list_of_memories[:3]:
-            wrong_gigabyte_computer_serializer.data["memory_id"].append(memory)
-        for memory in list_of_memories[:5]:
-            wrong_asrock_computer_serializer.data["memory_id"].append(memory)
+    def test_if_processor_is_compatible_with_motherboard(self):
+        asus_mb_with_amd_processor_computer = ComputerSerializer(
+                self.erroneous_asus_computer
+            )
+        gigabyte_mb_with_intel_processor_computer = ComputerSerializer(
+                self.erroneous_gigabyte_computer
+            )
 
         self.assertRaises(
-            ValidationError,
-            validate_computer_components,
-            wrong_asus_computer_serializer.data,
-        )
+                ValidationError,
+                validate_processor_compatibility_with_motherboard,
+                asus_mb_with_amd_processor_computer.data
+            )
+        self.assertRaises(
+                ValidationError,
+                validate_processor_compatibility_with_motherboard,
+                gigabyte_mb_with_intel_processor_computer.data
+            )
+
+    def test_if_number_of_ram_cards_is_compatible_with_motherboard(self):
+        asus_computer = ComputerSerializer(self.asus_computer)
+        asrock_computer = ComputerSerializer(self.asrock_computer)
+
+        memories_list = [MemorySerializer(self.ram4gb) for memory in range(5)]
+
+        for memory in memories_list[:3]:
+            asus_computer.data['memory_id'].append(memory.data)
+
+        for memory in memories_list:
+            asrock_computer.data['memory_id'].append(memory.data)
+
+        self.assertRaises(
+                ValidationError,
+                validate_memory_cards_and_motherboard_ram_slots,
+                asus_computer.data
+            )
         self.assertRaises(
             ValidationError,
-            validate_computer_components,
-            wrong_gigabyte_computer_serializer.data,
-        )
-        self.assertRaises(
-            ValidationError,
-            validate_computer_components,
-            wrong_asrock_computer_serializer.data,
+            validate_memory_cards_and_motherboard_ram_slots,
+            asrock_computer.data
         )

@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 def validate_processor(data) -> None:
     """
-    Validate processor specifications.
+    Validate processor specifications when adding to database.
     """
     description = data["processor_description"]
     brand = data["processor_brand"]
@@ -19,7 +19,7 @@ def validate_processor(data) -> None:
 
 def validate_motherboard(data) -> None:
     """
-    Validate motherboard specifications.
+    Validate motherboard specifications when adding to database.
     """
     description = data["motherboard_description"]
     supported_processor = data["supported_processors"]
@@ -65,89 +65,37 @@ def validate_motherboard(data) -> None:
             )
 
 
-def list_computer_configurations() -> dict:
+def validate_processor_compatibility_with_motherboard(data) -> None:
     """
-    List expected configuration of each motherboard brand.
-    The computer_config format is like this:
-    {
-        'motherboard brand' : [
-            'supported processor brand',
-            'ram memory slots',
-            'max ram memory accepted',
-            'integrated graphics'
-        ]
-    }
+    If processor incompatible with motherboard this validation function
+    raises an exception.
     """
-    computer_config = {
-        "ASUS": ["Intel", 2, 16, False],
-        "Gigabyte": ["AMD", 2, 16, False],
-        "ASRock": ["Hybrid", 4, 64, True],
-    }
-    return computer_config
+    motherboard = data['motherboard_id'].motherboard_description
+    expected_processor = data['motherboard_id'].supported_processors
+    ordered_processor = data['processor_id'].processor_description
+
+    if expected_processor not in ordered_processor:
+        if 'ASRock' not in motherboard:
+            raise serializers.ValidationError(
+                f"You selected incorrect processor for your {motherboard} "
+                f"motherboard. {motherboard} is only compatible with "
+                f"{expected_processor} processors."
+            )
 
 
-def prepare_data_to_computer_build_validation(data) -> list:
+def validate_memory_cards_and_motherboard_ram_slots(data) -> None:
     """
-    Get serialized data and returns computer data prepared to validation.
+    If the quantity of ram memory cards chosen is greater than
+    the motherboard ram slots, this validation function raises an
+    exception.
     """
-    processor = data["processor_id"]
-    memories = data["memory_id"]
-    memories_quantity = len(memories)
-    total_ram = 0
-    for memory in memories:
-        total_ram += memory.RAM_size
-    has_graphic_card = bool(str(data["graphic_card_id"]))
-    return [str(processor), memories_quantity, total_ram, has_graphic_card]
-
-
-def validate_computer_components(data) -> None:
-    """
-    Validate computer build.
-    The logic of this function is an interation through expected data
-    and recepcted data. The iteration compares selected processor with
-    expected processor, the amount of ram memory cards selected and the
-    total of ram memory selected with expected values and if is
-    expected to select a graphic card or no.
-    If the motherboard is ASRock Fatal, which accepts Intel or AMD
-    processors, it's made a change to string 'hybrid' to expected
-    processor and another change in boolean value, which represents
-    the graphic card, to pass the last validation condition.
-    """
-    allowed_computer_config_dict = list_computer_configurations()
-    config_to_validate = prepare_data_to_computer_build_validation(data)
-    motherboard_brand = str(data["motherboard_id"])
-    
-    for mb_brand, config in allowed_computer_config_dict.items():
-        if mb_brand in motherboard_brand:
-            allowed_hardware = config
-    if motherboard_brand == "ASRock Fatal":
-        allowed_hardware[0] = config_to_validate[0]
-        config_to_validate[-1] = not config_to_validate[-1]
-    for index, selected_hardware in enumerate(config_to_validate):
-        if isinstance(selected_hardware, str):
-            if not allowed_hardware[index] in selected_hardware:
-                raise serializers.ValidationError(
-                    f"{motherboard_brand} Motherboards are only compatible with "
-                    f"{allowed_hardware[index]} Processors. "
-                    f"You selected an {selected_hardware} processor."
-                )
-        elif index == 1:
-            if selected_hardware > allowed_hardware[index]:
-                raise serializers.ValidationError(
-                    f"Computers with {motherboard_brand} motherboard shouldn't have more "
-                    f"than {allowed_hardware[index]} ram memory cards. "
-                    f"You selected {selected_hardware} memory cards."
-                )
-        elif index == 2:
-            if selected_hardware > allowed_hardware[index]:
-                raise serializers.ValidationError(
-                    f"{motherboard_brand} motherboard can't accept more than "
-                    f"{allowed_hardware[index]}GB ram memory. "
-                    f"You selected a total of {selected_hardware}GB ram memory."
-                )
-        elif isinstance(selected_hardware, bool):
-            if selected_hardware == allowed_hardware[index]:
-                raise serializers.ValidationError(
-                    f"Computers with {motherboard_brand} motherboard must have "
-                    "a graphic card associated with it. Pick one."
-                )
+    motherboard = data['motherboard_id'].motherboard_description
+    expected_quantity_of_ram_cards = data['motherboard_id'].slots_RAM
+    ordered_quantity_of_ram_cards = len(data['memory_id'])
+    if ordered_quantity_of_ram_cards > expected_quantity_of_ram_cards:
+        raise serializers.ValidationError(
+            "You selected incorrect number of ram memory cards for your "
+            f"computer. {motherboard} motherboard only have "
+            f"{expected_quantity_of_ram_cards} ram slots. "
+            f"You selected {ordered_quantity_of_ram_cards}."
+        )

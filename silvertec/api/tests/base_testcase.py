@@ -88,11 +88,14 @@ class BaseTestCase(TestCase):
             3, self.intel_processor_1, self.asrock_motherboard, GraphicCard()
         )
         self.erroneous_asus_computer = Computer(
-            4, self.intel_processor_2, self.asus_motherboard, GraphicCard()
+            4, self.amd_processor_1, self.asus_motherboard, GraphicCard()
         )
         self.erroneous_gigabyte_computer = Computer(
-            5, self.amd_processor_2, self.gigabyte_motherboard, GraphicCard()
+            5, self.intel_processor_1, self.gigabyte_motherboard, GraphicCard()
         )
         self.erroneous_asrock_computer = Computer(
-            6, self.intel_processor_2, self.asrock_motherboard, self.geforce_graphic_card
+            6,
+            self.intel_processor_2,
+            self.asrock_motherboard,
+            self.geforce_graphic_card,
         )
