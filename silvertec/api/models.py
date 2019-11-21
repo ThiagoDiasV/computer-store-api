@@ -13,9 +13,7 @@ class Processor(models.Model):
 
     processor_brands_choices = [("Intel", "Intel"), ("AMD", "AMD")]
 
-    processor_description = models.CharField(
-        max_length=30, choices=processor_choices
-    )
+    processor_description = models.CharField(max_length=30, choices=processor_choices)
     processor_brand = models.CharField(max_length=10, choices=processor_brands_choices)
 
     def __str__(self):
