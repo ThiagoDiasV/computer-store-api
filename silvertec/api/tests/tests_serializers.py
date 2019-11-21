@@ -12,7 +12,7 @@ class TestModelProcessor(BaseTestCase):
         super(TestModelProcessor, self).setUp()
 
     def test_if_processor_is_an_Intel_then_AMD_brand_is_not_allowed(self):
-        serializer = ProcessorSerializer(self.intel_processor)
+        serializer = ProcessorSerializer(self.intel_processor_1)
         description = serializer.data["processor_description"]
         brand = serializer.data["processor_brand"]
         self.assertIn("Intel", description)
@@ -35,40 +35,40 @@ class TestModelMotherBoard(BaseTestCase):
         serializer = MotherBoardSerializer(self.asus_motherboard)
         description = serializer.data["motherboard_description"]
         supported_processor = serializer.data["supported_processors"]
-        slots_RAM = serializer.data["slots_RAM"]
-        max_RAM = serializer.data["max_RAM_supported"]
-        integrated_video = serializer.data["integrated_video"]
+        slots_ram = serializer.data["slots_ram"]
+        max_ram = serializer.data["max_ram_supported"]
+        integrated_graphic = serializer.data["integrated_graphic"]
         self.assertIn("ASUS", description)
         self.assertIn("Intel", supported_processor)
-        self.assertEqual(2, slots_RAM)
-        self.assertEqual(16, max_RAM)
-        self.assertFalse(integrated_video)
+        self.assertEqual(2, slots_ram)
+        self.assertEqual(16, max_ram)
+        self.assertFalse(integrated_graphic)
 
     def test_if_gigabyte_mb_is_correctly_set(self):
         serializer = MotherBoardSerializer(self.gigabyte_motherboard)
         description = serializer.data["motherboard_description"]
         supported_processor = serializer.data["supported_processors"]
-        slots_RAM = serializer.data["slots_RAM"]
-        max_RAM = serializer.data["max_RAM_supported"]
-        integrated_video = serializer.data["integrated_video"]
+        slots_ram = serializer.data["slots_ram"]
+        max_ram = serializer.data["max_ram_supported"]
+        integrated_graphic = serializer.data["integrated_graphic"]
         self.assertIn("Gigabyte", description)
         self.assertIn("AMD", supported_processor)
-        self.assertEqual(2, slots_RAM)
-        self.assertEqual(16, max_RAM)
-        self.assertFalse(integrated_video)
+        self.assertEqual(2, slots_ram)
+        self.assertEqual(16, max_ram)
+        self.assertFalse(integrated_graphic)
 
     def test_if_asrock_mb_is_correctly_set(self):
         serializer = MotherBoardSerializer(self.asrock_motherboard)
         description = serializer.data["motherboard_description"]
         supported_processor = serializer.data["supported_processors"]
-        slots_RAM = serializer.data["slots_RAM"]
-        max_RAM = serializer.data["max_RAM_supported"]
-        integrated_video = serializer.data["integrated_video"]
+        slots_ram = serializer.data["slots_ram"]
+        max_ram = serializer.data["max_ram_supported"]
+        integrated_graphic = serializer.data["integrated_graphic"]
         self.assertIn("ASRock", description)
         self.assertIn("Hybrid", supported_processor)
-        self.assertEqual(4, slots_RAM)
-        self.assertEqual(64, max_RAM)
-        self.assertTrue(integrated_video)
+        self.assertEqual(4, slots_ram)
+        self.assertEqual(64, max_ram)
+        self.assertTrue(integrated_graphic)
 
 
 class TestModelComputer(BaseTestCase):
@@ -81,12 +81,12 @@ class TestModelComputer(BaseTestCase):
         memory_2_serializer = MemorySerializer(self.ram8gb)
 
         total_ram = sum(
-            (memory_1_serializer.data["RAM_size"], memory_2_serializer.data["RAM_size"])
+            (memory_1_serializer.data["ram_size"], memory_2_serializer.data["ram_size"])
         )
 
         self.assertIn("Intel", str(computer_serializer.data["processor_id"]))
         self.assertLessEqual(total_ram, 16)
-        self.assertTrue(str(computer_serializer.data["video_card_id"]))
+        self.assertTrue(str(computer_serializer.data["graphic_card_id"]))
 
     def test_gigabyte_computer_components(self):
         computer_serializer = ComputerSerializer(self.gigabyte_computer)
@@ -95,19 +95,15 @@ class TestModelComputer(BaseTestCase):
         memory_3_serializer = MemorySerializer(self.ram4gb)
 
         total_ram = sum(
-            (memory_1_serializer.data["RAM_size"], memory_2_serializer.data["RAM_size"])
+            (memory_1_serializer.data["ram_size"], memory_2_serializer.data["ram_size"])
         )
         total_ram_cards = len(
-            (
-                memory_1_serializer,
-                memory_2_serializer,
-                memory_3_serializer
-            )
+            (memory_1_serializer, memory_2_serializer, memory_3_serializer)
         )
 
         self.assertIn("AMD", str(computer_serializer.data["processor_id"]))
         self.assertLessEqual(total_ram, 16)
-        self.assertTrue(str(computer_serializer.data["video_card_id"]))
+        self.assertTrue(str(computer_serializer.data["graphic_card_id"]))
         self.assertGreater(total_ram_cards, 2)
 
     def test_asrock_computer_components(self):
@@ -116,9 +112,9 @@ class TestModelComputer(BaseTestCase):
         memory_2_serializer = MemorySerializer(self.ram32gb)
 
         total_ram = sum(
-            (memory_1_serializer.data["RAM_size"], memory_2_serializer.data["RAM_size"])
+            (memory_1_serializer.data["ram_size"], memory_2_serializer.data["ram_size"])
         )
 
         self.assertIn("Intel", str(computer_serializer.data["processor_id"]))
         self.assertLessEqual(total_ram, 64)
-        self.assertFalse(str(computer_serializer.data["video_card_id"]))
+        self.assertFalse(str(computer_serializer.data["graphic_card_id"]))

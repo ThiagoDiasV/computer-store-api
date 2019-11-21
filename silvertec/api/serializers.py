@@ -1,7 +1,12 @@
 from rest_framework import serializers
-from .models import Processor, MotherBoard, Memory, VideoCard, User, Order, Computer
+from .models import Processor, MotherBoard, Memory, GraphicCard, User, Order, Computer
 from .validations import (
-    validate_processor, validate_motherboard, validate_computers_components
+    validate_processor,
+    validate_motherboard,
+    validate_processor_compatibility_with_motherboard,
+    validate_memory_cards_and_motherboard_ram_slots,
+    validate_total_ram_ordered_and_motherboard_ram_support,
+    validate_graphic_card_or_not_in_motherboard,
 )
 
 
@@ -31,15 +36,18 @@ class MemorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class VideoCardSerializer(serializers.ModelSerializer):
+class GraphicCardSerializer(serializers.ModelSerializer):
     class Meta:
-        model = VideoCard
+        model = GraphicCard
         fields = "__all__"
 
 
 class ComputerSerializer(serializers.ModelSerializer):
     def validate(self, data):
-        validate_computers_components(data)
+        validate_processor_compatibility_with_motherboard(data)
+        validate_memory_cards_and_motherboard_ram_slots(data)
+        validate_total_ram_ordered_and_motherboard_ram_support(data),
+        validate_graphic_card_or_not_in_motherboard(data)
         return data
 
     class Meta:
