@@ -3,13 +3,13 @@ from ..validations import (
     validate_processor,
     validate_motherboard,
     validate_processor_compatibility_with_motherboard,
-    validate_memory_cards_and_motherboard_ram_slots
+    validate_memory_cards_and_motherboard_ram_slots,
 )
 from ..serializers import (
     ProcessorSerializer,
     MotherBoardSerializer,
     ComputerSerializer,
-    MemorySerializer
+    MemorySerializer,
 )
 from rest_framework.serializers import ValidationError
 
@@ -56,22 +56,22 @@ class TestComputerValidationsFunctions(BaseTestCase):
 
     def test_if_processor_is_compatible_with_motherboard(self):
         asus_mb_with_amd_processor_computer = ComputerSerializer(
-                self.erroneous_asus_computer
-            )
+            self.erroneous_asus_computer
+        )
         gigabyte_mb_with_intel_processor_computer = ComputerSerializer(
-                self.erroneous_gigabyte_computer
-            )
+            self.erroneous_gigabyte_computer
+        )
 
         self.assertRaises(
-                ValidationError,
-                validate_processor_compatibility_with_motherboard,
-                asus_mb_with_amd_processor_computer.data
-            )
+            ValidationError,
+            validate_processor_compatibility_with_motherboard,
+            asus_mb_with_amd_processor_computer.data,
+        )
         self.assertRaises(
-                ValidationError,
-                validate_processor_compatibility_with_motherboard,
-                gigabyte_mb_with_intel_processor_computer.data
-            )
+            ValidationError,
+            validate_processor_compatibility_with_motherboard,
+            gigabyte_mb_with_intel_processor_computer.data,
+        )
 
     def test_if_number_of_ram_cards_is_compatible_with_motherboard(self):
         asus_computer = ComputerSerializer(self.asus_computer)
@@ -80,18 +80,18 @@ class TestComputerValidationsFunctions(BaseTestCase):
         memories_list = [MemorySerializer(self.ram4gb) for memory in range(5)]
 
         for memory in memories_list[:3]:
-            asus_computer.data['memory_id'].append(memory.data)
+            asus_computer.data["memory_id"].append(memory.data)
 
         for memory in memories_list:
-            asrock_computer.data['memory_id'].append(memory.data)
+            asrock_computer.data["memory_id"].append(memory.data)
 
-        self.assertRaises(
-                ValidationError,
-                validate_memory_cards_and_motherboard_ram_slots,
-                asus_computer.data
-            )
         self.assertRaises(
             ValidationError,
             validate_memory_cards_and_motherboard_ram_slots,
-            asrock_computer.data
+            asus_computer.data,
+        )
+        self.assertRaises(
+            ValidationError,
+            validate_memory_cards_and_motherboard_ram_slots,
+            asrock_computer.data,
         )

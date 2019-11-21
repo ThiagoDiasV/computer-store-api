@@ -4,7 +4,7 @@ from .validations import (
     validate_processor,
     validate_motherboard,
     validate_processor_compatibility_with_motherboard,
-    validate_memory_cards_and_motherboard_ram_slots
+    validate_memory_cards_and_motherboard_ram_slots,
 )
 
 

@@ -70,12 +70,12 @@ def validate_processor_compatibility_with_motherboard(data) -> None:
     If processor incompatible with motherboard this validation function
     raises an exception.
     """
-    motherboard = data['motherboard_id'].motherboard_description
-    expected_processor = data['motherboard_id'].supported_processors
-    ordered_processor = data['processor_id'].processor_description
+    motherboard = data["motherboard_id"].motherboard_description
+    expected_processor = data["motherboard_id"].supported_processors
+    ordered_processor = data["processor_id"].processor_description
 
     if expected_processor not in ordered_processor:
-        if 'ASRock' not in motherboard:
+        if "ASRock" not in motherboard:
             raise serializers.ValidationError(
                 f"You selected incorrect processor for your {motherboard} "
                 f"motherboard. {motherboard} is only compatible with "
@@ -89,9 +89,9 @@ def validate_memory_cards_and_motherboard_ram_slots(data) -> None:
     the motherboard ram slots, this validation function raises an
     exception.
     """
-    motherboard = data['motherboard_id'].motherboard_description
-    expected_quantity_of_ram_cards = data['motherboard_id'].slots_RAM
-    ordered_quantity_of_ram_cards = len(data['memory_id'])
+    motherboard = data["motherboard_id"].motherboard_description
+    expected_quantity_of_ram_cards = data["motherboard_id"].slots_RAM
+    ordered_quantity_of_ram_cards = len(data["memory_id"])
     if ordered_quantity_of_ram_cards > expected_quantity_of_ram_cards:
         raise serializers.ValidationError(
             "You selected incorrect number of ram memory cards for your "
