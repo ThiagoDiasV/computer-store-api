@@ -15,7 +15,7 @@ def create_memories(apps, schema_editor):
         Memory(7, ram_description="Hiper X", ram_size=32).save(),
         Memory(8, ram_description="Hiper X", ram_size=32).save(),
         Memory(9, ram_description="Hiper X", ram_size=64).save(),
-        Memory(10, ram_description="Hiper X", ram_size=64).save()
+        Memory(10, ram_description="Hiper X", ram_size=64).save(),
     ]
 
 
