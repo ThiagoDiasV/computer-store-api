@@ -92,10 +92,10 @@ class Computer(models.Model):
         total_ram = 0
         for memory in data:
             total_ram += memory['ram_size']
+        base_string = f"{self.motherboard_id} {self.processor_id} {total_ram}GB"
         if self.graphic_card_id != None:
-            return f"{self.motherboard_id} {self.processor_id} {total_ram}GB {self.graphic_card_id}"
-        else:
-            return f"{self.motherboard_id} {self.processor_id} {total_ram}GB"
+            return f"{base_string} {self.graphic_card_id}"
+        return f"{base_string}"
 
 
 class Order(models.Model):
