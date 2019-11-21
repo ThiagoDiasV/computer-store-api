@@ -102,12 +102,11 @@ class TestComputerValidationsFunctions(BaseTestCase):
         asus_computer = ComputerSerializer(self.asus_computer)
         asrock_computer = ComputerSerializer(self.asrock_computer)
 
-        memory_1 = MemorySerializer(self.ram32gb)
-        memory_2 = MemorySerializer(self.ram64gb)
-
-        asus_computer.data["memory_id"].append(memory_1.data)
-        asrock_computer.data["memory_id"].append(memory_2.data)
-        asrock_computer.data["memory_id"].append(memory_2.data)
+        memory_1 = self.ram32gb
+        memory_2 = self.ram64gb
+        asus_computer.data["memory_id"].append(memory_1)
+        asrock_computer.data["memory_id"].append(memory_2)
+        asrock_computer.data["memory_id"].append(memory_2)
 
         self.assertRaises(
             ValidationError,

@@ -82,7 +82,7 @@ class BaseTestCase(TestCase):
             1, self.intel_processor_1, self.asus_motherboard, self.geforce_graphic_card
         )
         self.asus_computer_2 = Computer(
-            2, self.intel_processor_2, self.asus_motherboard, GraphicCard()
+            2, self.intel_processor_2, self.asus_motherboard, None
         )
         self.gigabyte_computer = Computer(
             3,

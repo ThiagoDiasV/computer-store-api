@@ -109,8 +109,9 @@ def validate_total_ram_ordered_and_motherboard_ram_support(data) -> None:
     motherboard = data["motherboard_id"].motherboard_description
     expected_total_ram = data["motherboard_id"].max_ram_supported
     ordered_total_of_ram = 0
+
     for memory in data["memory_id"]:
-        ordered_total_of_ram += memory["ram_size"]
+        ordered_total_of_ram += memory.ram_size
     if ordered_total_of_ram > expected_total_ram:
         raise serializers.ValidationError(
             "You choose a total of RAM memory greater than the maximum "
@@ -129,9 +130,8 @@ def validate_graphic_card_or_not_in_motherboard(data) -> None:
     """
     motherboard = data["motherboard_id"].motherboard_description
     mb_has_integrated_graphics = data["motherboard_id"].integrated_graphic
-    # from ipdb import set_trace; set_trace()
     if not mb_has_integrated_graphics:
-        if not str(data["graphic_card_id"]):
+        if not data["graphic_card_id"]:
             raise serializers.ValidationError(
                 f"{motherboard} motherboard doesn't have integrated graphics. "
                 "You must order a graphic card to your computer."
