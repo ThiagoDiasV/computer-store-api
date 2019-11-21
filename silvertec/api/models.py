@@ -35,9 +35,9 @@ class MotherBoard(models.Model):
         ("Hybrid", "Hybrid"),
     ]
 
-    slots_RAM_choices = [(2, "2"), (4, "4")]
+    slots_ram_choices = [(2, "2"), (4, "4")]
 
-    max_RAM_supported_choices = [(16, "16 GB"), (64, "64 GB")]
+    max_ram_supported_choices = [(16, "16 GB"), (64, "64 GB")]
 
     motherboard_description = models.CharField(
         max_length=30, choices=motherboard_choices, unique=True
@@ -45,8 +45,8 @@ class MotherBoard(models.Model):
     supported_processors = models.CharField(
         max_length=10, choices=supported_processors_choices
     )
-    slots_RAM = models.PositiveIntegerField(choices=slots_RAM_choices)
-    max_RAM_supported = models.PositiveIntegerField(choices=max_RAM_supported_choices)
+    slots_ram = models.PositiveIntegerField(choices=slots_ram_choices)
+    max_ram_supported = models.PositiveIntegerField(choices=max_ram_supported_choices)
     integrated_graphic = models.BooleanField()
 
     def __str__(self):
@@ -58,12 +58,12 @@ class Memory(models.Model):
 
     sizes_choices = [(4, "4"), (8, "8"), (16, "16"), (32, "32"), (64, "64")]
 
-    RAM_description = models.CharField(max_length=10, choices=memory_choices)
+    ram_description = models.CharField(max_length=10, choices=memory_choices)
 
-    RAM_size = models.PositiveIntegerField(choices=sizes_choices)
+    ram_size = models.PositiveIntegerField(choices=sizes_choices)
 
     def __str__(self):
-        return f"{self.RAM_description} {self.RAM_size} GB"
+        return f"{self.ram_description} {self.ram_size} GB"
 
 
 class GraphicCard(models.Model):

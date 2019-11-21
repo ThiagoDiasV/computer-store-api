@@ -25,50 +25,50 @@ class BaseTestCase(TestCase):
         self.asus_motherboard = MotherBoard(
             motherboard_description="ASUS Prime",
             supported_processors="Intel",
-            slots_RAM=2,
-            max_RAM_supported=16,
+            slots_ram=2,
+            max_ram_supported=16,
             integrated_graphic=False,
         )
         self.gigabyte_motherboard = MotherBoard(
             motherboard_description="Gigabyte",
             supported_processors="AMD",
-            slots_RAM=2,
-            max_RAM_supported=16,
+            slots_ram=2,
+            max_ram_supported=16,
             integrated_graphic=False,
         )
         self.asrock_motherboard = MotherBoard(
             motherboard_description="ASRock Fatal",
             supported_processors="Hybrid",
-            slots_RAM=4,
-            max_RAM_supported=64,
+            slots_ram=4,
+            max_ram_supported=64,
             integrated_graphic=True,
         )
         self.erroneous_asus_motherboard = MotherBoard(
             motherboard_description="ASUS Prime",
             supported_processors="AMD",
-            slots_RAM=2,
-            max_RAM_supported=16,
+            slots_ram=2,
+            max_ram_supported=16,
             integrated_graphic=False,
         )
         self.erroneous_gigabyte_motherboard = MotherBoard(
             motherboard_description="Gigabyte",
             supported_processors="AMD",
-            slots_RAM=4,
-            max_RAM_supported=16,
+            slots_ram=4,
+            max_ram_supported=16,
             integrated_graphic=False,
         )
         self.erroneous_asrock_motherboard = MotherBoard(
             motherboard_description="ASRock Fatal",
             supported_processors="Hybrid",
-            slots_RAM=4,
-            max_RAM_supported=16,
+            slots_ram=4,
+            max_ram_supported=16,
             integrated_graphic=False,
         )
-        self.ram4gb = Memory(RAM_description="Hiper X", RAM_size=4)
-        self.ram8gb = Memory(RAM_description="Hiper X", RAM_size=8)
-        self.ram16gb = Memory(RAM_description="Hiper X", RAM_size=16)
-        self.ram32gb = Memory(RAM_description="Hiper X", RAM_size=32)
-        self.ram64gb = Memory(RAM_description="Hiper X", RAM_size=64)
+        self.ram4gb = Memory(ram_description="Hiper X", ram_size=4)
+        self.ram8gb = Memory(ram_description="Hiper X", ram_size=8)
+        self.ram16gb = Memory(ram_description="Hiper X", ram_size=16)
+        self.ram32gb = Memory(ram_description="Hiper X", ram_size=32)
+        self.ram64gb = Memory(ram_description="Hiper X", ram_size=64)
         self.geforce_graphic_card = GraphicCard(
             graphic_card_description="Gigabyte Geforce GTX 1060 6GB"
         )
@@ -81,20 +81,26 @@ class BaseTestCase(TestCase):
         self.asus_computer = Computer(
             1, self.intel_processor_1, self.asus_motherboard, self.geforce_graphic_card
         )
+        self.asus_computer_2 = Computer(
+            2, self.intel_processor_2, self.asus_motherboard, GraphicCard()
+        )
         self.gigabyte_computer = Computer(
-            2, self.amd_processor_1, self.gigabyte_motherboard, self.pnyrtx_graphic_card
+            3,
+            self.amd_processor_1,
+            self.gigabyte_motherboard,
+            self.radeonrx_graphic_card,
         )
         self.asrock_computer = Computer(
-            3, self.intel_processor_1, self.asrock_motherboard, GraphicCard()
+            4, self.intel_processor_1, self.asrock_motherboard, GraphicCard()
         )
         self.erroneous_asus_computer = Computer(
-            4, self.amd_processor_1, self.asus_motherboard, GraphicCard()
+            5, self.amd_processor_1, self.asus_motherboard, GraphicCard()
         )
         self.erroneous_gigabyte_computer = Computer(
-            5, self.intel_processor_1, self.gigabyte_motherboard, GraphicCard()
+            6, self.intel_processor_1, self.gigabyte_motherboard, GraphicCard()
         )
         self.erroneous_asrock_computer = Computer(
-            6,
+            7,
             self.intel_processor_2,
             self.asrock_motherboard,
             self.geforce_graphic_card,

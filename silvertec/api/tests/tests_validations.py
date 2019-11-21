@@ -4,6 +4,8 @@ from ..validations import (
     validate_motherboard,
     validate_processor_compatibility_with_motherboard,
     validate_memory_cards_and_motherboard_ram_slots,
+    validate_total_ram_ordered_and_motherboard_ram_support,
+    validate_graphic_card_or_not_in_motherboard,
 )
 from ..serializers import (
     ProcessorSerializer,
@@ -94,4 +96,36 @@ class TestComputerValidationsFunctions(BaseTestCase):
             ValidationError,
             validate_memory_cards_and_motherboard_ram_slots,
             asrock_computer.data,
+        )
+
+    def test_if_total_ram_ordered_is_compatible_with_motherboard(self):
+        asus_computer = ComputerSerializer(self.asus_computer)
+        asrock_computer = ComputerSerializer(self.asrock_computer)
+
+        memory_1 = MemorySerializer(self.ram32gb)
+        memory_2 = MemorySerializer(self.ram64gb)
+
+        asus_computer.data["memory_id"].append(memory_1.data)
+        asrock_computer.data["memory_id"].append(memory_2.data)
+        asrock_computer.data["memory_id"].append(memory_2.data)
+
+        self.assertRaises(
+            ValidationError,
+            validate_total_ram_ordered_and_motherboard_ram_support,
+            asus_computer.data,
+        )
+
+        self.assertRaises(
+            ValidationError,
+            validate_total_ram_ordered_and_motherboard_ram_support,
+            asrock_computer.data,
+        )
+
+    def test_if_ordered_motherboard_needs_graphic_card_or_not(self):
+        asus_computer = ComputerSerializer(self.asus_computer_2)
+
+        self.assertRaises(
+            ValidationError,
+            validate_graphic_card_or_not_in_motherboard,
+            asus_computer.data,
         )
