@@ -4,18 +4,21 @@ from django.db import migrations
 
 
 def create_memories(apps, schema_editor):
+    """
+    Create memories to populate database.
+    """
     Memory = apps.get_model("api", "Memory")
     [
-        Memory(1, ram_description="Hiper X", ram_size=4).save(),
-        Memory(2, ram_description="Hiper X", ram_size=4).save(),
-        Memory(3, ram_description="Hiper X", ram_size=8).save(),
-        Memory(4, ram_description="Hiper X", ram_size=8).save(),
-        Memory(5, ram_description="Hiper X", ram_size=16).save(),
-        Memory(6, ram_description="Hiper X", ram_size=16).save(),
-        Memory(7, ram_description="Hiper X", ram_size=32).save(),
-        Memory(8, ram_description="Hiper X", ram_size=32).save(),
-        Memory(9, ram_description="Hiper X", ram_size=64).save(),
-        Memory(10, ram_description="Hiper X", ram_size=64).save(),
+        Memory(ram_description="Hiper X", ram_size=4).save(),
+        Memory(ram_description="Hiper X", ram_size=4).save(),
+        Memory(ram_description="Hiper X", ram_size=8).save(),
+        Memory(ram_description="Hiper X", ram_size=8).save(),
+        Memory(ram_description="Hiper X", ram_size=16).save(),
+        Memory(ram_description="Hiper X", ram_size=16).save(),
+        Memory(ram_description="Hiper X", ram_size=32).save(),
+        Memory(ram_description="Hiper X", ram_size=32).save(),
+        Memory(ram_description="Hiper X", ram_size=64).save(),
+        Memory(ram_description="Hiper X", ram_size=64).save(),
     ]
 
 

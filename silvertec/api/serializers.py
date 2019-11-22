@@ -1,5 +1,13 @@
 from rest_framework import serializers
-from .models import Processor, MotherBoard, Memory, GraphicCard, User, Order, Computer
+from .models import (
+    Processor,
+    MotherBoard,
+    Memory,
+    GraphicCard,
+    User,
+    Order,
+    Computer,
+)
 from .validations import (
     validate_processor,
     validate_motherboard,
@@ -44,6 +52,7 @@ class GraphicCardSerializer(serializers.ModelSerializer):
 
 class ComputerSerializer(serializers.ModelSerializer):
     def validate(self, data):
+        # from ipdb import set_trace; set_trace()
         validate_processor_compatibility_with_motherboard(data)
         validate_memory_cards_and_motherboard_ram_slots(data)
         validate_total_ram_ordered_and_motherboard_ram_support(data),
@@ -58,10 +67,12 @@ class ComputerSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'password')
+        fields = ("username",)
+        user_id = serializers.ReadOnlyField(source="user_id.username")
 
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
+        
         model = Order
         fields = "__all__"

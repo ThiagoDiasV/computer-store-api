@@ -4,10 +4,12 @@ from django.db import migrations
 
 
 def create_motherboards(apps, schema_editor):
+    """
+    Create motherboards to populate database.
+    """
     MotherBoard = apps.get_model("api", "MotherBoard")
     [
         MotherBoard(
-            1,
             motherboard_description="ASUS Prime",
             supported_processors="Intel",
             slots_ram=2,
@@ -15,7 +17,6 @@ def create_motherboards(apps, schema_editor):
             integrated_graphic=False,
         ).save(),
         MotherBoard(
-            2,
             motherboard_description="Gigabyte",
             supported_processors="AMD",
             slots_ram=2,

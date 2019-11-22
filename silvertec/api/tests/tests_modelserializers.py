@@ -9,7 +9,7 @@ from .base_testcase import BaseTestCase
 
 class TestModelProcessor(BaseTestCase):
     def setUp(self) -> None:
-        super(TestModelProcessor, self).setUp()
+        super().setUp()
 
     def test_if_processor_is_an_Intel_then_AMD_brand_is_not_allowed(self):
         serializer = ProcessorSerializer(self.intel_processor_1)
@@ -29,7 +29,7 @@ class TestModelProcessor(BaseTestCase):
 
 class TestModelMotherBoard(BaseTestCase):
     def setUp(self) -> None:
-        super(TestModelMotherBoard, self).setUp()
+        super().setUp()
 
     def test_if_ASUS_mb_is_correctly_set(self):
         serializer = MotherBoardSerializer(self.asus_motherboard)
@@ -73,7 +73,7 @@ class TestModelMotherBoard(BaseTestCase):
 
 class TestModelComputer(BaseTestCase):
     def setUp(self) -> None:
-        super(TestModelComputer, self).setUp()
+        super().setUp()
 
     def test_asus_computer_components(self):
         computer_serializer = ComputerSerializer(self.asus_computer)
@@ -81,7 +81,10 @@ class TestModelComputer(BaseTestCase):
         memory_2_serializer = MemorySerializer(self.ram8gb)
 
         total_ram = sum(
-            (memory_1_serializer.data["ram_size"], memory_2_serializer.data["ram_size"])
+            (
+                memory_1_serializer.data["ram_size"],
+                memory_2_serializer.data["ram_size"],
+            )
         )
 
         self.assertIn("Intel", str(computer_serializer.data["processor_id"]))
@@ -95,10 +98,13 @@ class TestModelComputer(BaseTestCase):
         memory_3_serializer = MemorySerializer(self.ram4gb)
 
         total_ram = sum(
-            (memory_1_serializer.data["ram_size"], memory_2_serializer.data["ram_size"])
+            (
+                memory_1_serializer.data["ram_size"],
+                memory_2_serializer.data["ram_size"],
+            )
         )
         total_ram_cards = len(
-            (memory_1_serializer, memory_2_serializer, memory_3_serializer)
+            (memory_1_serializer, memory_2_serializer, memory_3_serializer,)
         )
 
         self.assertIn("AMD", str(computer_serializer.data["processor_id"]))
@@ -112,7 +118,10 @@ class TestModelComputer(BaseTestCase):
         memory_2_serializer = MemorySerializer(self.ram32gb)
 
         total_ram = sum(
-            (memory_1_serializer.data["ram_size"], memory_2_serializer.data["ram_size"])
+            (
+                memory_1_serializer.data["ram_size"],
+                memory_2_serializer.data["ram_size"],
+            )
         )
 
         self.assertIn("Intel", str(computer_serializer.data["processor_id"]))
