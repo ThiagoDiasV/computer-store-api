@@ -84,7 +84,7 @@ class BaseTestCase(TestCase):
             self.asus_motherboard,
             self.geforce_graphic_card,
         )
-        self.asus_computer_2 = Computer(
+        self.wrong_asus_computer = Computer(
             2, self.intel_processor_2, self.asus_motherboard, None
         )
         self.gigabyte_computer = Computer(
@@ -96,7 +96,7 @@ class BaseTestCase(TestCase):
         self.asrock_computer = Computer(
             4, self.intel_processor_1, self.asrock_motherboard, GraphicCard()
         )
-        self.erroneous_asus_computer = Computer(
+        self.asus_computer_with_wrong_mb_processor_compatibility = Computer(
             5, self.amd_processor_1, self.asus_motherboard, GraphicCard()
         )
         self.erroneous_gigabyte_computer = Computer(

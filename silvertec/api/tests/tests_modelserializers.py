@@ -9,7 +9,7 @@ from .base_testcase import BaseTestCase
 
 class TestModelProcessor(BaseTestCase):
     def setUp(self) -> None:
-        super(TestModelProcessor, self).setUp()
+        super().setUp()
 
     def test_if_processor_is_an_Intel_then_AMD_brand_is_not_allowed(self):
         serializer = ProcessorSerializer(self.intel_processor_1)
@@ -29,7 +29,7 @@ class TestModelProcessor(BaseTestCase):
 
 class TestModelMotherBoard(BaseTestCase):
     def setUp(self) -> None:
-        super(TestModelMotherBoard, self).setUp()
+        super().setUp()
 
     def test_if_ASUS_mb_is_correctly_set(self):
         serializer = MotherBoardSerializer(self.asus_motherboard)
@@ -73,7 +73,7 @@ class TestModelMotherBoard(BaseTestCase):
 
 class TestModelComputer(BaseTestCase):
     def setUp(self) -> None:
-        super(TestModelComputer, self).setUp()
+        super().setUp()
 
     def test_asus_computer_components(self):
         computer_serializer = ComputerSerializer(self.asus_computer)

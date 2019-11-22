@@ -37,36 +37,31 @@ def validate_motherboard(data) -> None:
     real_asrock_specifications = ("Hybrid", 4, 64, True)
     if "ASUS" in description:
         real_specifications = real_asus_specifications
-        possible_error_message = """
-        ASUS Prime motherboard must have this configuration:
-        Supported processors: Intel
-        RAM memory slots: 2
-        Max RAM supported: 16GB
-        Integrated graphic: No (or False).
-        """
+        possible_error_message = (
+            "ASUS Prime motherboard must have this "
+            "configuration: Supported processors: Intel // RAM memory slots: 2"
+            " // Max RAM supported: 16GB // Integrated graphic: No (or False)."
+        )
     elif "Gigabyte" in description:
         real_specifications = real_gigabyte_specifications
-        possible_error_message = """
-        Gigabyte motherboard must have this configuration:
-        Supported processors: AMD
-        RAM memory slots: 2
-        Max RAM supported: 16GB
-        Integrated graphic: No (or False).
-        """
+        possible_error_message = (
+            "Gigabyte motherboard must have this "
+            "configuration: Supported processors: AMD // RAM memory slots: 2 "
+            "// Max RAM supported: 16GB // Integrated graphic: No (or False)."
+        )
     elif "ASRock" in description:
         real_specifications = real_asrock_specifications
-        possible_error_message = """
-        ASRock Fatal motherboard must have this configuration:
-        Supported processors: Hybrid (Intel or AMD)
-        RAM memory slots: 4
-        Max RAM supported: 64GB
-        Integrated graphic: Yes (or True).
-        """
+        possible_error_message = (
+            "ASRock Fatal motherboard must have this "
+            "configuration: Supported processors: Hybrid (Intel or AMD)// "
+            "RAM memory slots: 4 // Max RAM supported: 64GB // "
+            "Integrated graphic: Yes (or True)."
+        )
     for index, item in enumerate(specifications):
         if specifications[index] != real_specifications[index]:
             raise serializers.ValidationError(
                 "You selected incorrect configuration. Please try again."
-                f"Error message: {possible_error_message}"
+                f" Error message: {possible_error_message}"
             )
 
 

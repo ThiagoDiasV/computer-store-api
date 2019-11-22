@@ -7,6 +7,7 @@ chardet==3.0.4
 Click==7.0
 decorator==4.4.1
 Django==2.2.7
+django-filter==2.2.0
 djangorestframework==3.10.3
 httpie==1.0.3
 idna==2.8
