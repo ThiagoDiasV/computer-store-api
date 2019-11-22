@@ -70,12 +70,20 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "ram_description",
-                    models.CharField(choices=[("Hiper X", "Hiper X")], max_length=10),
+                    models.CharField(
+                        choices=[("Hiper X", "Hiper X")], max_length=10
+                    ),
                 ),
                 (
                     "ram_size",
                     models.PositiveIntegerField(
-                        choices=[(4, "4"), (8, "8"), (16, "16"), (32, "32"), (64, "64")]
+                        choices=[
+                            (4, "4"),
+                            (8, "8"),
+                            (16, "16"),
+                            (32, "32"),
+                            (64, "64"),
+                        ]
                     ),
                 ),
             ],
@@ -120,7 +128,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "max_ram_supported",
-                    models.PositiveIntegerField(choices=[(16, "16 GB"), (64, "64 GB")]),
+                    models.PositiveIntegerField(
+                        choices=[(16, "16 GB"), (64, "64 GB")]
+                    ),
                 ),
                 ("integrated_graphic", models.BooleanField()),
             ],
@@ -152,7 +162,8 @@ class Migration(migrations.Migration):
                 (
                     "processor_brand",
                     models.CharField(
-                        choices=[("Intel", "Intel"), ("AMD", "AMD")], max_length=10
+                        choices=[("Intel", "Intel"), ("AMD", "AMD")],
+                        max_length=10,
                     ),
                 ),
             ],
@@ -197,7 +208,8 @@ class Migration(migrations.Migration):
             model_name="computer",
             name="motherboard_id",
             field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE, to="api.MotherBoard"
+                on_delete=django.db.models.deletion.CASCADE,
+                to="api.MotherBoard",
             ),
         ),
         migrations.AddField(

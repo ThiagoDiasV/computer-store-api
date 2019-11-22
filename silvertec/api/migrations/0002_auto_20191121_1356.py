@@ -15,8 +15,12 @@ def create_processors(apps, schema_editor):
         Processor(
             2, processor_description="Intel Core i7", processor_brand="Intel"
         ).save(),
-        Processor(3, processor_description="AMD Ryzen 7", processor_brand="AMD").save(),
-        Processor(4, processor_description="AMD Athlon", processor_brand="AMD").save(),
+        Processor(
+            3, processor_description="AMD Ryzen 7", processor_brand="AMD"
+        ).save(),
+        Processor(
+            4, processor_description="AMD Athlon", processor_brand="AMD"
+        ).save(),
     ]
 
 

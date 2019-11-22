@@ -26,7 +26,12 @@ def validate_motherboard(data) -> None:
     slots_ram = data["slots_ram"]
     max_ram = data["max_ram_supported"]
     integrated_graphic = data["integrated_graphic"]
-    specifications = (supported_processor, slots_ram, max_ram, integrated_graphic)
+    specifications = (
+        supported_processor,
+        slots_ram,
+        max_ram,
+        integrated_graphic,
+    )
     real_asus_specifications = ("Intel", 2, 16, False)
     real_gigabyte_specifications = ("AMD", 2, 16, False)
     real_asrock_specifications = ("Hybrid", 4, 64, True)

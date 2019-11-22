@@ -13,8 +13,12 @@ class Processor(models.Model):
 
     processor_brands_choices = [("Intel", "Intel"), ("AMD", "AMD")]
 
-    processor_description = models.CharField(max_length=30, choices=processor_choices)
-    processor_brand = models.CharField(max_length=10, choices=processor_brands_choices)
+    processor_description = models.CharField(
+        max_length=30, choices=processor_choices
+    )
+    processor_brand = models.CharField(
+        max_length=10, choices=processor_brands_choices
+    )
 
     def __str__(self):
         return f"{self.processor_description}"
@@ -44,7 +48,9 @@ class MotherBoard(models.Model):
         max_length=10, choices=supported_processors_choices
     )
     slots_ram = models.PositiveIntegerField(choices=slots_ram_choices)
-    max_ram_supported = models.PositiveIntegerField(choices=max_ram_supported_choices)
+    max_ram_supported = models.PositiveIntegerField(
+        choices=max_ram_supported_choices
+    )
     integrated_graphic = models.BooleanField()
 
     def __str__(self):
@@ -91,9 +97,11 @@ class Computer(models.Model):
         data = self.memory_id.values()
         total_ram = 0
         for memory in data:
-            total_ram += memory['ram_size']
-        base_string = f"{self.motherboard_id} {self.processor_id} {total_ram}GB"
-        if self.graphic_card_id != None:
+            total_ram += memory["ram_size"]
+        base_string = (
+            f"{self.motherboard_id} {self.processor_id} {total_ram}GB"
+        )
+        if self.graphic_card_id is not None:
             return f"{base_string} {self.graphic_card_id}"
         return f"{base_string}"
 

@@ -27,8 +27,12 @@ class TestProcessorValidationFunction(BaseTestCase):
     def test_processor_validation_function(self):
         serializer_1 = ProcessorSerializer(self.erroneous_amd_processor)
         serializer_2 = ProcessorSerializer(self.erroneous_intel_processor_1)
-        self.assertRaises(ValidationError, validate_processor, serializer_1.data)
-        self.assertRaises(ValidationError, validate_processor, serializer_2.data)
+        self.assertRaises(
+            ValidationError, validate_processor, serializer_1.data
+        )
+        self.assertRaises(
+            ValidationError, validate_processor, serializer_2.data
+        )
 
 
 class TestMotherBoardValidationFunction(BaseTestCase):
@@ -41,11 +45,19 @@ class TestMotherBoardValidationFunction(BaseTestCase):
 
     def test_motherboard_validation_function(self):
         serializer_1 = MotherBoardSerializer(self.erroneous_asus_motherboard)
-        serializer_2 = MotherBoardSerializer(self.erroneous_gigabyte_motherboard)
+        serializer_2 = MotherBoardSerializer(
+            self.erroneous_gigabyte_motherboard
+        )
         serializer_3 = MotherBoardSerializer(self.erroneous_asrock_motherboard)
-        self.assertRaises(ValidationError, validate_motherboard, serializer_1.data)
-        self.assertRaises(ValidationError, validate_motherboard, serializer_2.data)
-        self.assertRaises(ValidationError, validate_motherboard, serializer_3.data)
+        self.assertRaises(
+            ValidationError, validate_motherboard, serializer_1.data
+        )
+        self.assertRaises(
+            ValidationError, validate_motherboard, serializer_2.data
+        )
+        self.assertRaises(
+            ValidationError, validate_motherboard, serializer_3.data
+        )
 
 
 class TestComputerValidationsFunctions(BaseTestCase):

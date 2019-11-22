@@ -1,5 +1,12 @@
 from django.contrib import admin
-from .models import Processor, MotherBoard, Memory, GraphicCard, Order, Computer
+from .models import (
+    Processor,
+    MotherBoard,
+    Memory,
+    GraphicCard,
+    Order,
+    Computer,
+)
 
 
 admin.site.register(Processor)

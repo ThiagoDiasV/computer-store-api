@@ -79,7 +79,10 @@ class BaseTestCase(TestCase):
             graphic_card_description="Radeon RX 580 8GB"
         )
         self.asus_computer = Computer(
-            1, self.intel_processor_1, self.asus_motherboard, self.geforce_graphic_card
+            1,
+            self.intel_processor_1,
+            self.asus_motherboard,
+            self.geforce_graphic_card,
         )
         self.asus_computer_2 = Computer(
             2, self.intel_processor_2, self.asus_motherboard, None

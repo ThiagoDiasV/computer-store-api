@@ -1,5 +1,13 @@
 from rest_framework import serializers
-from .models import Processor, MotherBoard, Memory, GraphicCard, User, Order, Computer
+from .models import (
+    Processor,
+    MotherBoard,
+    Memory,
+    GraphicCard,
+    User,
+    Order,
+    Computer,
+)
 from .validations import (
     validate_processor,
     validate_motherboard,
@@ -10,7 +18,7 @@ from .validations import (
 )
 
 
-class ProcessorSerializer(serializers.HyperlinkedModelSerializer):
+class ProcessorSerializer(serializers.ModelSerializer):
     def validate(self, data):
         validate_processor(data)
         return data
@@ -20,7 +28,7 @@ class ProcessorSerializer(serializers.HyperlinkedModelSerializer):
         fields = "__all__"
 
 
-class MotherBoardSerializer(serializers.HyperlinkedModelSerializer):
+class MotherBoardSerializer(serializers.ModelSerializer):
     def validate(self, data):
         validate_motherboard(data)
         return data
@@ -30,20 +38,21 @@ class MotherBoardSerializer(serializers.HyperlinkedModelSerializer):
         fields = "__all__"
 
 
-class MemorySerializer(serializers.HyperlinkedModelSerializer):
+class MemorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Memory
         fields = "__all__"
 
 
-class GraphicCardSerializer(serializers.HyperlinkedModelSerializer):
+class GraphicCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = GraphicCard
         fields = "__all__"
 
 
-class ComputerSerializer(serializers.HyperlinkedModelSerializer):
+class ComputerSerializer(serializers.ModelSerializer):
     def validate(self, data):
+        # from ipdb import set_trace; set_trace()
         validate_processor_compatibility_with_motherboard(data)
         validate_memory_cards_and_motherboard_ram_slots(data)
         validate_total_ram_ordered_and_motherboard_ram_support(data),
@@ -55,14 +64,14 @@ class ComputerSerializer(serializers.HyperlinkedModelSerializer):
         fields = "__all__"
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', )
-        user_id = serializers.ReadOnlyField(source='user_id.username')
+        fields = ("username",)
+        user_id = serializers.ReadOnlyField(source="user_id.username")
 
 
-class OrderSerializer(serializers.HyperlinkedModelSerializer):
+class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = "__all__"
