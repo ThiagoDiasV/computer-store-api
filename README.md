@@ -1,25 +1,44 @@
 # Silvertec Rest API Challenge
 
-## Install
+## Install and run
 
 ### With Dockerfile and docker-compose
-`After clone the repository`
-    
-    cd silvertec
 
-`Create a Python virtual environment first and then with docker`
+With this repository in your machine, access the silvertec directory:
     
-    (venv) docker-compose up
+    $ cd silvertec
+
+(Optional) To avoid any incovenience to your operational system, create a Python virtual environment with your preferred virtual environment generator like venv...
+    
+    $ python -m venv venv
+
+...and activate it:
+
+`On Linux and MacOS` 
+
+    $ source venv/bin/activate
+
+`On Windows`
+
+    /> venv\Scripts\activate
+
+And then with Docker and docker-compose, do:
+
+    (venv) docker-compose up --build
+
+Now you will be able to navigate through the Silvertec API.
 
 ### With Python 3.7
 
-    adicionar instruções
+Like above, prefer to create a Python virtual environment and inside silvertec directory:
 
-## Run the app
+    python manage.py migrate
+    python manage.py runserver
 
-    adicionar instruções de uso do app
 
 ## Run the tests
+
+During development some unittests were made. You can cover your Silvertec API with these tests running:
 
     python manage.py test
 
@@ -43,4 +62,3 @@ The Rest API is described below
 
     /openapi/swagger/
     /openapi/redoc/
-
