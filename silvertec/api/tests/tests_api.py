@@ -1,5 +1,8 @@
 from rest_framework import status
 from .base_apitestcase import BaseAPITestCase
+from ..models import Computer
+from model_bakery import baker
+from ..serializers import ComputerSerializer
 
 
 class ProcessorMotherBoardSerializersApiTests(BaseAPITestCase):
@@ -102,4 +105,17 @@ class OrdersAndComputersBuildApiTests(BaseAPITestCase):
         )
         self.assertEqual(
             update_first_graphiccard.status_code, status.HTTP_200_OK
+        )
+
+    def test_if_no_user_so_no_orders_can_be_made_then_http_400(self):
+        fake_computer_instance_id = ComputerSerializer(
+            baker.make(Computer)
+        ).data['id']
+        post_fake_computer_inside_an_order = self.client.post(
+            f"{self.url_orders}", {"computer_id": [fake_computer_instance_id]},
+            format='json'                
+        )
+        self.assertEqual(
+            post_fake_computer_inside_an_order.status_code,
+            status.HTTP_400_BAD_REQUEST
         )

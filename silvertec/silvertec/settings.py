@@ -14,7 +14,7 @@ SECRET_KEY = "q@ggdc!4jdldz8(b+dq#yth(2rfal*iopz&slup7n!3qt&q8t*"
 DEBUG = True
 
 # SECURITY ISSUE: this is only for demo purposes
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
