@@ -4,35 +4,36 @@
 
 ### Using Dockerfile and docker-compose
 
-With this repository in your machine, access the silvertec directory:
+Clone this repository at a root directory and after this, access the silvertec directory:
     
-    $ cd silvertec
+    root $ cd silvertec
 
 And then with Docker and docker-compose, do:
 
-    $ docker-compose up --build
+    root/silvertec $ docker-compose up --build
 
 This command above will: 
 - Create and migrate database 
-- Ask you to create a superuser
 - Run unit tests
 - Run server
 
 Now you will be able to navigate through the Silvertec API.
-To have authenticated user permissions, please open other terminal instance at root directory and create a super user using python manage.py inside the container:
+To have authenticated user permissions, please open other terminal instance at root container directory and create a super user using python manage.py inside the container:
 
-    $ docker exec -it silvertec python silvertec/manage.py createsuperuser
+    root/silvertec $ docker exec -it silvertec python silvertec/manage.py createsuperuser
 
 ### Using Python 3.7
 
-Prefer to create a Python virtual environment and then, in root:
+Prefer to create a Python virtual environment and then
 
-    $ (venv) pip install -r requirements.txt
+    (venv) root $ cd silvertec
+
+    (venv) root/silvertec $  pip install -r requirements.txt
 
 After installing requirements, go to silvertec directory and run:
 
-    $ (venv) python manage.py migrate
-    $ (venv) python manage.py runserver
+    (venv) root/silvertec $ python manage.py migrate
+    (venv) root/silvertec $ python manage.py runserver
 
 ## Run the tests
 
