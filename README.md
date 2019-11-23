@@ -76,11 +76,11 @@ Returns json or html data with all processors in database.
 
     - Code
     
-        200 OK
+        `200 OK`
 
     - Content 
     
-        [{"id":1,"processor_description":"Intel Core i5","processor_brand":"Intel"},{"id":2,"processor_description":"Intel   Core i7","processor_brand":"Intel"},{"id":3,"processor_description":"AMD Ryzen 7","processor_brand":"AMD"},{"id":4,"processor_description":"AMD Athlon","processor_brand":"AMD"},{"id":5,"processor_description":"Intel Core i5","processor_brand":"Intel"},{"id":6,"processor_description":"Intel Core i7","processor_brand":"Intel"}]
+        `[{"id":1,"processor_description":"Intel Core i5","processor_brand":"Intel"},{"id":2,"processor_description":"Intel   Core i7","processor_brand":"Intel"},{"id":3,"processor_description":"AMD Ryzen 7","processor_brand":"AMD"},{"id":4,"processor_description":"AMD Athlon","processor_brand":"AMD"}]`
 
 ## API documentation endpoints
 
