@@ -67,7 +67,7 @@ def validate_motherboard(data) -> None:
 
 def validate_processor_compatibility_with_motherboard(data) -> None:
     """
-    If processor incompatible with motherboard this validation function
+    If processor is incompatible with motherboard this validation function
     raises an exception.
     """
     motherboard = data["motherboard_id"].motherboard_description

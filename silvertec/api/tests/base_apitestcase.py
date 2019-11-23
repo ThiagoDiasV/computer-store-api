@@ -7,10 +7,11 @@ class BaseAPITestCase(APITestCase, BaseTestCase):
     def setUp(self):
         super().setUp()
         self.user = User.objects.create(username="intmed")
-        self.url_processors = "/processors/"
-        self.url_motherboards = "/motherboards/"
-        self.url_computers = "/computers/"
-        self.url_orders = "/orders/"
+        self.url_processors = "/api/processors/"
+        self.url_motherboards = "/api/motherboards/"
+        self.url_computers = "/api/computers/"
+        self.url_graphic_cards = "/api/graphiccards/"
+        self.url_orders = "/api/orders/"
         self.client.force_authenticate(user=self.user)
         self.correct_processor_to_json = {
             "id": 5,
@@ -76,7 +77,8 @@ class BaseAPITestCase(APITestCase, BaseTestCase):
             .first()
             .id,
         }
-        self.first_computer_id_to_json = {
+        self.first_computer_id_to_json = {"id": 1, "computer_id": 1}
+        self.graphic_card_sample = {
             "id": 1,
-            "computer_id": 1
+            "graphic_card_description": "Radeon RX 580 8GB",
         }
