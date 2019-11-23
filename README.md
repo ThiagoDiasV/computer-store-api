@@ -4,9 +4,11 @@
 
 ### With Dockerfile and docker-compose
 `After clone the repository`
+    
     cd silvertec
 
 `Create a Python virtual environment first and then with docker`
+    
     (venv) docker-compose up
 
 ### With Python 3.7
