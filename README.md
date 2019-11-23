@@ -19,6 +19,9 @@ This command above will:
 - Run server
 
 Now you will be able to navigate through the Silvertec API.
+You can use demo superuser created in order to use the API with Docker:
+`admin: intmed`
+`password: intmed`
 
 ### Using Python 3.7
 
