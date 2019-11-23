@@ -26,6 +26,8 @@ And then with Docker and docker-compose, do:
 
     (venv) docker-compose up --build
 
+This command above will create and migrate database, run unit tests and run the server.
+
 Now you will be able to navigate through the Silvertec API.
 
 ### With Python 3.7
