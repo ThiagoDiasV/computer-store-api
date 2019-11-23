@@ -41,7 +41,7 @@ You can cover Silvertec API with unit tests running:
 
 ### Using Docker
 
-    root/silvertec $ docker exec -it silvertec python silvertec/manage.py test
+    root/silvertec $ docker exec -it silvertec python silvertec/manage.py test api.tests
 
 ### Using Python 3.7
 
