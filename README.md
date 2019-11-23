@@ -102,6 +102,7 @@ Returns json or html data with created graphic card.
     Required:
 
     `graphic_card_description=[string]`
+    
     Obs: Needs authentication credentials
 
 - Success Response:
@@ -129,6 +130,103 @@ Returns json or html data with created graphic card.
             "graphic_card_description": [
                 "\"Radeon RX 580\" is not a valid choice."
             ]
+        }`
+
+### Update Memory
+Returns json or html data with updated memory card.
+
+- URL
+    
+    /api/memories/:id/
+
+- Method
+
+    `PUT`
+
+- URL Params
+    
+    Required:
+    `id=[integer]`
+
+- Data Params
+    
+    Required:
+
+    `ram_description=[string]`
+    `ram_size=[integer]`
+    
+    Obs: Needs authentication credentials
+
+- Success Response:
+
+    - HTTP status code
+    
+        `200 OK`
+
+    - Content 
+    
+        `{
+            "id": 1,
+            "ram_description": "Hiper X",
+            "ram_size": 32
+        }`
+
+- Error Response
+
+    - HTTP status code
+    
+        `404 NOT FOUND`
+
+    - Content 
+    
+        `{
+            "detail": "Not found."
+        }`
+
+### Delete Motherboard
+Delete motherboard.
+
+- URL
+    
+    /api/motherboards/:id/
+
+- Method
+
+    `DELETE`
+
+- URL Params
+    
+    Required:
+    `id=[integer]`
+
+- Data Params
+    
+    Required:
+
+    None
+    
+    Obs: Needs authentication credentials
+
+- Success Response:
+
+    - HTTP status code
+    
+        `204 NO CONTENT`
+
+    - Content 
+    
+        None
+
+- Error Response
+
+    - HTTP status code
+    
+        `404 NOT FOUND`
+
+    - Content 
+    
+        `{
+            "detail": "Not found."
         }`
 
 ## API documentation endpoints
