@@ -76,7 +76,4 @@ class BaseAPITestCase(APITestCase, BaseTestCase):
             .first()
             .id,
         }
-        self.first_computer_id_to_json = {
-            "id": 1,
-            "computer_id": 1
-        }
+        self.first_computer_id_to_json = {"id": 1, "computer_id": 1}

@@ -77,3 +77,19 @@ class OrdersAndComputersBuildApiTests(BaseAPITestCase):
             wrong_computer_build_response_400.status_code,
             status.HTTP_400_BAD_REQUEST,
         )
+
+    def test_if_getting_an_non_existing_instance_shows_http_404(self):
+        get_non_existent_motherboard = self.client.get(
+            f"{self.url_motherboards}{300*400}/", format="json"
+        )
+        self.assertEqual(
+            get_non_existent_motherboard.status_code, status.HTTP_404_NOT_FOUND
+        )
+
+    def test_if_deleting_an_existing_instance_shows_http_204(self):
+        delete_first_motherboard = self.client.delete(
+            f"{self.url_motherboards}1/", format="json"
+        )
+        self.assertEqual(
+            delete_first_motherboard.status_code, status.HTTP_204_NO_CONTENT
+        )

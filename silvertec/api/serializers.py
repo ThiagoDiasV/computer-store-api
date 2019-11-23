@@ -52,7 +52,6 @@ class GraphicCardSerializer(serializers.ModelSerializer):
 
 class ComputerSerializer(serializers.ModelSerializer):
     def validate(self, data):
-        # from ipdb import set_trace; set_trace()
         validate_processor_compatibility_with_motherboard(data)
         validate_memory_cards_and_motherboard_ram_slots(data)
         validate_total_ram_ordered_and_motherboard_ram_support(data),
@@ -73,6 +72,5 @@ class UserSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
-        
         model = Order
         fields = "__all__"
