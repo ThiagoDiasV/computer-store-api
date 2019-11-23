@@ -8,7 +8,7 @@ def create_super_user(apps, schema_editor):
     """
     Create a sample super user to demonstrate the API using with docker.
     """
-    User.objects.create_superuser(username='intmed', password='intmed')
+    User.objects.create_superuser(username='intmed', password='intmed', email='intmed@intmed.com')
 
 
 class Migration(migrations.Migration):
