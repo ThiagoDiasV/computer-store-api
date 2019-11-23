@@ -39,7 +39,13 @@ After installing requirements, go to silvertec directory and run:
 
 You can cover Silvertec API with unit tests running:
 
-    $ (venv) python manage.py test
+### Using Docker
+
+    root/silvertec $ docker exec -it silvertec python silvertec/manage.py test
+
+### Using Python 3.7
+
+    (venv) root/silvertec $ python manage.py test
 
 # Rest API
 
