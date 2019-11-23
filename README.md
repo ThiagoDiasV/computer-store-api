@@ -2,7 +2,7 @@
 
 ## Install and run
 
-### With Dockerfile and docker-compose
+### Using Dockerfile and docker-compose
 
 With this repository in your machine, access the silvertec directory:
     
@@ -20,7 +20,7 @@ This command above will:
 
 Now you will be able to navigate through the Silvertec API.
 
-### With Python 3.7
+### Using Python 3.7
 
 Prefer to create a Python virtual environment and then, in root:
 

@@ -19,32 +19,39 @@ from .serializers import (
 from rest_framework import permissions, viewsets
 
 
+class IsAdminUserOrReadOnly(permissions.IsAdminUser):
+
+    def has_permission(self, request, view):
+        is_admin = super().has_permission(request, view)
+        return request.method in permissions.SAFE_METHODS or is_admin
+
+
 class ProcessorViewSet(viewsets.ModelViewSet):
     queryset = Processor.objects.all()
     serializer_class = ProcessorSerializer
     filter_fields = "__all__"
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminUserOrReadOnly]
 
 
 class MotherBoardViewSet(viewsets.ModelViewSet):
     queryset = MotherBoard.objects.all()
     serializer_class = MotherBoardSerializer
     filter_fields = "__all__"
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminUserOrReadOnly]
 
 
 class MemoryViewSet(viewsets.ModelViewSet):
     queryset = Memory.objects.all()
     serializer_class = MemorySerializer
     filter_fields = "__all__"
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminUserOrReadOnly]
 
 
 class GraphicCardViewSet(viewsets.ModelViewSet):
     queryset = GraphicCard.objects.all()
     serializer_class = GraphicCardSerializer
     filter_fields = "__all__"
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminUserOrReadOnly]
 
 
 class ComputerViewSet(viewsets.ModelViewSet):
