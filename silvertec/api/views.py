@@ -30,28 +30,28 @@ class ProcessorViewSet(viewsets.ModelViewSet):
     queryset = Processor.objects.all()
     serializer_class = ProcessorSerializer
     filter_fields = "__all__"
-    permission_classes = [IsAdminUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class MotherBoardViewSet(viewsets.ModelViewSet):
     queryset = MotherBoard.objects.all()
     serializer_class = MotherBoardSerializer
     filter_fields = "__all__"
-    permission_classes = [IsAdminUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class MemoryViewSet(viewsets.ModelViewSet):
     queryset = Memory.objects.all()
     serializer_class = MemorySerializer
     filter_fields = "__all__"
-    permission_classes = [IsAdminUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class GraphicCardViewSet(viewsets.ModelViewSet):
     queryset = GraphicCard.objects.all()
     serializer_class = GraphicCardSerializer
     filter_fields = "__all__"
-    permission_classes = [IsAdminUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class ComputerViewSet(viewsets.ModelViewSet):
