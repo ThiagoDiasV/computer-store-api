@@ -19,9 +19,8 @@ This command above will:
 - Run server
 
 Now you will be able to navigate through the Silvertec API.
-You can use demo superuser created in order to use the API with Docker:
-`admin: intmed`
-`password: intmed`
+To have authenticated user permissions, please open other terminal instance at root directory and create a super user using python manage.py inside the container:
+`docker exec -it silvertec python silvertec/manage.py createsuperuser`
 
 ### Using Python 3.7
 
@@ -55,7 +54,7 @@ The Rest API is described below
     /api/users/
 
 #### Observation about endpoints
-Only superusers can create, update and delete processors, motherboads, memories and graphic cards.
+Only authenticated users can create, update and delete processors, motherboads, memories and graphic cards.
 
 ## Examples
 
