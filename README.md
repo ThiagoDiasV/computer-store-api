@@ -24,13 +24,13 @@ The Rest API is described below
 
 ## Endpoints
 
-    /processors/
-    /motherboards/
-    /memories/
-    /graphiccards/
-    /computers/
-    /orders/
-    /users/
+    /api/processors/
+    /api/motherboards/
+    /api/memories/
+    /api/graphiccards/
+    /api/computers/
+    /api/orders/
+    /api/users/
 
 ## API documentation endpoints
 
