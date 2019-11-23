@@ -20,7 +20,8 @@ This command above will:
 
 Now you will be able to navigate through the Silvertec API.
 To have authenticated user permissions, please open other terminal instance at root directory and create a super user using python manage.py inside the container:
-`docker exec -it silvertec python silvertec/manage.py createsuperuser`
+
+    docker exec -it silvertec python silvertec/manage.py createsuperuser
 
 ### Using Python 3.7
 
