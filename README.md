@@ -2,9 +2,12 @@
 
 ## Install
 
-### With Dockerfile
+### With Dockerfile and docker-compose
+`After clone the repository`
+    cd silvertec
 
-    adicionar instruções de instalação
+`Create a Python virtual environment first and then with docker`
+    (venv) docker-compose up
 
 ### With Python 3.7
 
