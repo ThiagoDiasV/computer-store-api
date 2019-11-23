@@ -51,6 +51,9 @@ The Rest API is described below
     /api/orders/
     /api/users/
 
+#### Observation about endpoints
+Only superusers can create, update and delete processors, motherboads, memories and graphic cards.
+
 ## Examples
 
 ### List Processors
@@ -184,7 +187,7 @@ Returns json or html data with updated memory card.
         }`
 
 ### Delete Motherboard
-Delete motherboard.
+Returns no content.
 
 - URL
     
