@@ -74,13 +74,62 @@ Returns json or html data with all processors in database.
 
 - Success Response:
 
-    - Code
+    - HTTP status code
     
         `200 OK`
 
     - Content 
     
         `[{"id":1,"processor_description":"Intel Core i5","processor_brand":"Intel"},{"id":2,"processor_description":"Intel   Core i7","processor_brand":"Intel"},{"id":3,"processor_description":"AMD Ryzen 7","processor_brand":"AMD"},{"id":4,"processor_description":"AMD Athlon","processor_brand":"AMD"}]`
+
+### Create New Graphic Card
+Returns json or html data with created graphic card.
+
+- URL
+    
+    /api/graphiccards/
+
+- Method
+
+    `POST`
+
+- URL Params
+    
+    None
+
+- Data Params
+    
+    Required:
+
+    `graphic_card_description=[string]`
+    Obs: Needs authentication credentials
+
+- Success Response:
+
+    - HTTP status code
+    
+        `201 CREATED`
+
+    - Content 
+    
+        `{
+            "graphic_card_description": "Radeon RX 580 8GB",
+            "id": 4
+        }`
+
+- Error Response
+
+    - HTTP status code
+    
+        `400 BAD REQUEST`
+
+    - Content 
+    
+        `{
+            "graphic_card_description": [
+                "\"Radeon RX 580\" is not a valid choice."
+            ]
+        }`
 
 ## API documentation endpoints
 
