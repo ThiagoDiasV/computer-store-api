@@ -7,11 +7,11 @@ class BaseAPITestCase(APITestCase, BaseTestCase):
     def setUp(self):
         super().setUp()
         self.user = User.objects.create(username="intmed")
-        self.url_processors = "/processors/"
-        self.url_motherboards = "/motherboards/"
-        self.url_computers = "/computers/"
-        self.url_graphic_cards = "/graphiccards/"
-        self.url_orders = "/orders/"
+        self.url_processors = "/api/processors/"
+        self.url_motherboards = "/api/motherboards/"
+        self.url_computers = "/api/computers/"
+        self.url_graphic_cards = "/api/graphiccards/"
+        self.url_orders = "/api/orders/"
         self.client.force_authenticate(user=self.user)
         self.correct_processor_to_json = {
             "id": 5,

@@ -28,7 +28,7 @@ router.register(r"orders", views.OrderViewSet)
 router.register(r"users", views.UserViewSet)
 
 urlpatterns = [
-    path("", include(router.urls)),
+    path("api/", include(router.urls)),
     path(
         "openapi/swagger/",
         schema_view.with_ui("swagger", cache_timeout=0),
