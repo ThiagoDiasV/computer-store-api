@@ -8,23 +8,9 @@ With this repository in your machine, access the silvertec directory:
     
     $ cd silvertec
 
-(Optional) To avoid any incovenience to your operational system, create a Python virtual environment with your preferred virtual environment generator like venv...
-    
-    $ python -m venv venv
-
-...and activate it:
-
-`On Linux and MacOS` 
-
-    $ source venv/bin/activate
-
-`On Windows`
-
-    /> venv\Scripts\activate
-
 And then with Docker and docker-compose, do:
 
-    (venv) docker-compose up --build
+    $ docker-compose up --build
 
 This command above will: 
 - Create and migrate database 
