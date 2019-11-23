@@ -26,7 +26,11 @@ And then with Docker and docker-compose, do:
 
     (venv) docker-compose up --build
 
-This command above will create and migrate database, run unit tests and run the server.
+This command above will: 
+- Create and migrate database 
+- Ask you to create a superuser
+- Run unit tests
+- Run server
 
 Now you will be able to navigate through the Silvertec API.
 

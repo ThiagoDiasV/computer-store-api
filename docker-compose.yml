@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     build: .
-    command: bash -c "python silvertec/manage.py migrate && python silvertec/manage.py test api.tests && python silvertec/manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python silvertec/manage.py migrate && python silvertec/manage.py test api.tests && python silvertec/manage.py createsuperuser && python silvertec/manage.py runserver 0.0.0.0:8000"
     container_name: silvertec
     volumes:
       - .:/silvertec
