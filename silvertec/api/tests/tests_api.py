@@ -93,3 +93,13 @@ class OrdersAndComputersBuildApiTests(BaseAPITestCase):
         self.assertEqual(
             delete_first_motherboard.status_code, status.HTTP_204_NO_CONTENT
         )
+
+    def test_if_updating_an_instance_shows_http_200(self):
+        update_first_graphiccard = self.client.put(
+            f"{self.url_graphic_cards}{self.graphic_card_sample['id']}/",
+            self.graphic_card_sample,
+            format="json",
+        )
+        self.assertEqual(
+            update_first_graphiccard.status_code, status.HTTP_200_OK
+        )

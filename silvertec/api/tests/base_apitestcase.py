@@ -10,6 +10,7 @@ class BaseAPITestCase(APITestCase, BaseTestCase):
         self.url_processors = "/processors/"
         self.url_motherboards = "/motherboards/"
         self.url_computers = "/computers/"
+        self.url_graphic_cards = "/graphiccards/"
         self.url_orders = "/orders/"
         self.client.force_authenticate(user=self.user)
         self.correct_processor_to_json = {
@@ -77,3 +78,7 @@ class BaseAPITestCase(APITestCase, BaseTestCase):
             .id,
         }
         self.first_computer_id_to_json = {"id": 1, "computer_id": 1}
+        self.graphic_card_sample = {
+            "id": 1,
+            "graphic_card_description": "Radeon RX 580 8GB",
+        }
