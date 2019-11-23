@@ -1,0 +1,2333 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /processors/:
+    get:
+      operationId: listProcessors
+      parameters:
+      - name: processor_description
+        required: false
+        in: query
+        description: processor_description
+        schema:
+          type: string
+      - name: processor_brand
+        required: false
+        in: query
+        description: processor_brand
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    processor_description:
+                      enum:
+                      - Intel Core i5
+                      - Intel Core i7
+                      - AMD Athlon
+                      - AMD Ryzen 7
+                    processor_brand:
+                      enum:
+                      - Intel
+                      - AMD
+                  required:
+                  - processor_description
+                  - processor_brand
+          description: ''
+    post:
+      operationId: createProcessor
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                processor_description:
+                  enum:
+                  - Intel Core i5
+                  - Intel Core i7
+                  - AMD Athlon
+                  - AMD Ryzen 7
+                processor_brand:
+                  enum:
+                  - Intel
+                  - AMD
+              required:
+              - processor_description
+              - processor_brand
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  processor_description:
+                    enum:
+                    - Intel Core i5
+                    - Intel Core i7
+                    - AMD Athlon
+                    - AMD Ryzen 7
+                  processor_brand:
+                    enum:
+                    - Intel
+                    - AMD
+                required:
+                - processor_description
+                - processor_brand
+          description: ''
+  /processors/{id}/:
+    get:
+      operationId: retrieveProcessor
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this processor.
+        schema:
+          type: string
+      - name: processor_description
+        required: false
+        in: query
+        description: processor_description
+        schema:
+          type: string
+      - name: processor_brand
+        required: false
+        in: query
+        description: processor_brand
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  processor_description:
+                    enum:
+                    - Intel Core i5
+                    - Intel Core i7
+                    - AMD Athlon
+                    - AMD Ryzen 7
+                  processor_brand:
+                    enum:
+                    - Intel
+                    - AMD
+                required:
+                - processor_description
+                - processor_brand
+          description: ''
+    put:
+      operationId: updateProcessor
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this processor.
+        schema:
+          type: string
+      - name: processor_description
+        required: false
+        in: query
+        description: processor_description
+        schema:
+          type: string
+      - name: processor_brand
+        required: false
+        in: query
+        description: processor_brand
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                processor_description:
+                  enum:
+                  - Intel Core i5
+                  - Intel Core i7
+                  - AMD Athlon
+                  - AMD Ryzen 7
+                processor_brand:
+                  enum:
+                  - Intel
+                  - AMD
+              required:
+              - processor_description
+              - processor_brand
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  processor_description:
+                    enum:
+                    - Intel Core i5
+                    - Intel Core i7
+                    - AMD Athlon
+                    - AMD Ryzen 7
+                  processor_brand:
+                    enum:
+                    - Intel
+                    - AMD
+                required:
+                - processor_description
+                - processor_brand
+          description: ''
+    patch:
+      operationId: partial_updateProcessor
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this processor.
+        schema:
+          type: string
+      - name: processor_description
+        required: false
+        in: query
+        description: processor_description
+        schema:
+          type: string
+      - name: processor_brand
+        required: false
+        in: query
+        description: processor_brand
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                processor_description:
+                  enum:
+                  - Intel Core i5
+                  - Intel Core i7
+                  - AMD Athlon
+                  - AMD Ryzen 7
+                processor_brand:
+                  enum:
+                  - Intel
+                  - AMD
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  processor_description:
+                    enum:
+                    - Intel Core i5
+                    - Intel Core i7
+                    - AMD Athlon
+                    - AMD Ryzen 7
+                  processor_brand:
+                    enum:
+                    - Intel
+                    - AMD
+                required:
+                - processor_description
+                - processor_brand
+          description: ''
+    delete:
+      operationId: destroyProcessor
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this processor.
+        schema:
+          type: string
+      - name: processor_description
+        required: false
+        in: query
+        description: processor_description
+        schema:
+          type: string
+      - name: processor_brand
+        required: false
+        in: query
+        description: processor_brand
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /motherboards/:
+    get:
+      operationId: listMotherBoards
+      parameters:
+      - name: motherboard_description
+        required: false
+        in: query
+        description: motherboard_description
+        schema:
+          type: string
+      - name: supported_processors
+        required: false
+        in: query
+        description: supported_processors
+        schema:
+          type: string
+      - name: slots_ram
+        required: false
+        in: query
+        description: slots_ram
+        schema:
+          type: string
+      - name: max_ram_supported
+        required: false
+        in: query
+        description: max_ram_supported
+        schema:
+          type: string
+      - name: integrated_graphic
+        required: false
+        in: query
+        description: integrated_graphic
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    motherboard_description:
+                      enum:
+                      - ASUS Prime
+                      - Gigabyte
+                      - ASRock Fatal
+                    supported_processors:
+                      enum:
+                      - Intel
+                      - AMD
+                      - Hybrid
+                    slots_ram:
+                      enum:
+                      - 2
+                      - 4
+                    max_ram_supported:
+                      enum:
+                      - 16
+                      - 64
+                    integrated_graphic:
+                      type: boolean
+                  required:
+                  - motherboard_description
+                  - supported_processors
+                  - slots_ram
+                  - max_ram_supported
+                  - integrated_graphic
+          description: ''
+    post:
+      operationId: createMotherBoard
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                motherboard_description:
+                  enum:
+                  - ASUS Prime
+                  - Gigabyte
+                  - ASRock Fatal
+                supported_processors:
+                  enum:
+                  - Intel
+                  - AMD
+                  - Hybrid
+                slots_ram:
+                  enum:
+                  - 2
+                  - 4
+                max_ram_supported:
+                  enum:
+                  - 16
+                  - 64
+                integrated_graphic:
+                  type: boolean
+              required:
+              - motherboard_description
+              - supported_processors
+              - slots_ram
+              - max_ram_supported
+              - integrated_graphic
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  motherboard_description:
+                    enum:
+                    - ASUS Prime
+                    - Gigabyte
+                    - ASRock Fatal
+                  supported_processors:
+                    enum:
+                    - Intel
+                    - AMD
+                    - Hybrid
+                  slots_ram:
+                    enum:
+                    - 2
+                    - 4
+                  max_ram_supported:
+                    enum:
+                    - 16
+                    - 64
+                  integrated_graphic:
+                    type: boolean
+                required:
+                - motherboard_description
+                - supported_processors
+                - slots_ram
+                - max_ram_supported
+                - integrated_graphic
+          description: ''
+  /motherboards/{id}/:
+    get:
+      operationId: retrieveMotherBoard
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this mother board.
+        schema:
+          type: string
+      - name: motherboard_description
+        required: false
+        in: query
+        description: motherboard_description
+        schema:
+          type: string
+      - name: supported_processors
+        required: false
+        in: query
+        description: supported_processors
+        schema:
+          type: string
+      - name: slots_ram
+        required: false
+        in: query
+        description: slots_ram
+        schema:
+          type: string
+      - name: max_ram_supported
+        required: false
+        in: query
+        description: max_ram_supported
+        schema:
+          type: string
+      - name: integrated_graphic
+        required: false
+        in: query
+        description: integrated_graphic
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  motherboard_description:
+                    enum:
+                    - ASUS Prime
+                    - Gigabyte
+                    - ASRock Fatal
+                  supported_processors:
+                    enum:
+                    - Intel
+                    - AMD
+                    - Hybrid
+                  slots_ram:
+                    enum:
+                    - 2
+                    - 4
+                  max_ram_supported:
+                    enum:
+                    - 16
+                    - 64
+                  integrated_graphic:
+                    type: boolean
+                required:
+                - motherboard_description
+                - supported_processors
+                - slots_ram
+                - max_ram_supported
+                - integrated_graphic
+          description: ''
+    put:
+      operationId: updateMotherBoard
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this mother board.
+        schema:
+          type: string
+      - name: motherboard_description
+        required: false
+        in: query
+        description: motherboard_description
+        schema:
+          type: string
+      - name: supported_processors
+        required: false
+        in: query
+        description: supported_processors
+        schema:
+          type: string
+      - name: slots_ram
+        required: false
+        in: query
+        description: slots_ram
+        schema:
+          type: string
+      - name: max_ram_supported
+        required: false
+        in: query
+        description: max_ram_supported
+        schema:
+          type: string
+      - name: integrated_graphic
+        required: false
+        in: query
+        description: integrated_graphic
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                motherboard_description:
+                  enum:
+                  - ASUS Prime
+                  - Gigabyte
+                  - ASRock Fatal
+                supported_processors:
+                  enum:
+                  - Intel
+                  - AMD
+                  - Hybrid
+                slots_ram:
+                  enum:
+                  - 2
+                  - 4
+                max_ram_supported:
+                  enum:
+                  - 16
+                  - 64
+                integrated_graphic:
+                  type: boolean
+              required:
+              - motherboard_description
+              - supported_processors
+              - slots_ram
+              - max_ram_supported
+              - integrated_graphic
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  motherboard_description:
+                    enum:
+                    - ASUS Prime
+                    - Gigabyte
+                    - ASRock Fatal
+                  supported_processors:
+                    enum:
+                    - Intel
+                    - AMD
+                    - Hybrid
+                  slots_ram:
+                    enum:
+                    - 2
+                    - 4
+                  max_ram_supported:
+                    enum:
+                    - 16
+                    - 64
+                  integrated_graphic:
+                    type: boolean
+                required:
+                - motherboard_description
+                - supported_processors
+                - slots_ram
+                - max_ram_supported
+                - integrated_graphic
+          description: ''
+    patch:
+      operationId: partial_updateMotherBoard
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this mother board.
+        schema:
+          type: string
+      - name: motherboard_description
+        required: false
+        in: query
+        description: motherboard_description
+        schema:
+          type: string
+      - name: supported_processors
+        required: false
+        in: query
+        description: supported_processors
+        schema:
+          type: string
+      - name: slots_ram
+        required: false
+        in: query
+        description: slots_ram
+        schema:
+          type: string
+      - name: max_ram_supported
+        required: false
+        in: query
+        description: max_ram_supported
+        schema:
+          type: string
+      - name: integrated_graphic
+        required: false
+        in: query
+        description: integrated_graphic
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                motherboard_description:
+                  enum:
+                  - ASUS Prime
+                  - Gigabyte
+                  - ASRock Fatal
+                supported_processors:
+                  enum:
+                  - Intel
+                  - AMD
+                  - Hybrid
+                slots_ram:
+                  enum:
+                  - 2
+                  - 4
+                max_ram_supported:
+                  enum:
+                  - 16
+                  - 64
+                integrated_graphic:
+                  type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  motherboard_description:
+                    enum:
+                    - ASUS Prime
+                    - Gigabyte
+                    - ASRock Fatal
+                  supported_processors:
+                    enum:
+                    - Intel
+                    - AMD
+                    - Hybrid
+                  slots_ram:
+                    enum:
+                    - 2
+                    - 4
+                  max_ram_supported:
+                    enum:
+                    - 16
+                    - 64
+                  integrated_graphic:
+                    type: boolean
+                required:
+                - motherboard_description
+                - supported_processors
+                - slots_ram
+                - max_ram_supported
+                - integrated_graphic
+          description: ''
+    delete:
+      operationId: destroyMotherBoard
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this mother board.
+        schema:
+          type: string
+      - name: motherboard_description
+        required: false
+        in: query
+        description: motherboard_description
+        schema:
+          type: string
+      - name: supported_processors
+        required: false
+        in: query
+        description: supported_processors
+        schema:
+          type: string
+      - name: slots_ram
+        required: false
+        in: query
+        description: slots_ram
+        schema:
+          type: string
+      - name: max_ram_supported
+        required: false
+        in: query
+        description: max_ram_supported
+        schema:
+          type: string
+      - name: integrated_graphic
+        required: false
+        in: query
+        description: integrated_graphic
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /memories/:
+    get:
+      operationId: listMemorys
+      parameters:
+      - name: ram_description
+        required: false
+        in: query
+        description: ram_description
+        schema:
+          type: string
+      - name: ram_size
+        required: false
+        in: query
+        description: ram_size
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    ram_description:
+                      enum:
+                      - Hiper X
+                    ram_size:
+                      enum:
+                      - 4
+                      - 8
+                      - 16
+                      - 32
+                      - 64
+                  required:
+                  - ram_description
+                  - ram_size
+          description: ''
+    post:
+      operationId: createMemory
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                ram_description:
+                  enum:
+                  - Hiper X
+                ram_size:
+                  enum:
+                  - 4
+                  - 8
+                  - 16
+                  - 32
+                  - 64
+              required:
+              - ram_description
+              - ram_size
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  ram_description:
+                    enum:
+                    - Hiper X
+                  ram_size:
+                    enum:
+                    - 4
+                    - 8
+                    - 16
+                    - 32
+                    - 64
+                required:
+                - ram_description
+                - ram_size
+          description: ''
+  /memories/{id}/:
+    get:
+      operationId: retrieveMemory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this memory.
+        schema:
+          type: string
+      - name: ram_description
+        required: false
+        in: query
+        description: ram_description
+        schema:
+          type: string
+      - name: ram_size
+        required: false
+        in: query
+        description: ram_size
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  ram_description:
+                    enum:
+                    - Hiper X
+                  ram_size:
+                    enum:
+                    - 4
+                    - 8
+                    - 16
+                    - 32
+                    - 64
+                required:
+                - ram_description
+                - ram_size
+          description: ''
+    put:
+      operationId: updateMemory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this memory.
+        schema:
+          type: string
+      - name: ram_description
+        required: false
+        in: query
+        description: ram_description
+        schema:
+          type: string
+      - name: ram_size
+        required: false
+        in: query
+        description: ram_size
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                ram_description:
+                  enum:
+                  - Hiper X
+                ram_size:
+                  enum:
+                  - 4
+                  - 8
+                  - 16
+                  - 32
+                  - 64
+              required:
+              - ram_description
+              - ram_size
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  ram_description:
+                    enum:
+                    - Hiper X
+                  ram_size:
+                    enum:
+                    - 4
+                    - 8
+                    - 16
+                    - 32
+                    - 64
+                required:
+                - ram_description
+                - ram_size
+          description: ''
+    patch:
+      operationId: partial_updateMemory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this memory.
+        schema:
+          type: string
+      - name: ram_description
+        required: false
+        in: query
+        description: ram_description
+        schema:
+          type: string
+      - name: ram_size
+        required: false
+        in: query
+        description: ram_size
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                ram_description:
+                  enum:
+                  - Hiper X
+                ram_size:
+                  enum:
+                  - 4
+                  - 8
+                  - 16
+                  - 32
+                  - 64
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  ram_description:
+                    enum:
+                    - Hiper X
+                  ram_size:
+                    enum:
+                    - 4
+                    - 8
+                    - 16
+                    - 32
+                    - 64
+                required:
+                - ram_description
+                - ram_size
+          description: ''
+    delete:
+      operationId: destroyMemory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this memory.
+        schema:
+          type: string
+      - name: ram_description
+        required: false
+        in: query
+        description: ram_description
+        schema:
+          type: string
+      - name: ram_size
+        required: false
+        in: query
+        description: ram_size
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /graphiccards/:
+    get:
+      operationId: listGraphicCards
+      parameters:
+      - name: graphic_card_description
+        required: false
+        in: query
+        description: graphic_card_description
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    graphic_card_description:
+                      enum:
+                      - Gigabyte Geforce GTX 1060 6GB
+                      - PNY RTX 2060 6GB
+                      - Radeon RX 580 8GB
+                  required:
+                  - graphic_card_description
+          description: ''
+    post:
+      operationId: createGraphicCard
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                graphic_card_description:
+                  enum:
+                  - Gigabyte Geforce GTX 1060 6GB
+                  - PNY RTX 2060 6GB
+                  - Radeon RX 580 8GB
+              required:
+              - graphic_card_description
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  graphic_card_description:
+                    enum:
+                    - Gigabyte Geforce GTX 1060 6GB
+                    - PNY RTX 2060 6GB
+                    - Radeon RX 580 8GB
+                required:
+                - graphic_card_description
+          description: ''
+  /graphiccards/{id}/:
+    get:
+      operationId: retrieveGraphicCard
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this graphic card.
+        schema:
+          type: string
+      - name: graphic_card_description
+        required: false
+        in: query
+        description: graphic_card_description
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  graphic_card_description:
+                    enum:
+                    - Gigabyte Geforce GTX 1060 6GB
+                    - PNY RTX 2060 6GB
+                    - Radeon RX 580 8GB
+                required:
+                - graphic_card_description
+          description: ''
+    put:
+      operationId: updateGraphicCard
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this graphic card.
+        schema:
+          type: string
+      - name: graphic_card_description
+        required: false
+        in: query
+        description: graphic_card_description
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                graphic_card_description:
+                  enum:
+                  - Gigabyte Geforce GTX 1060 6GB
+                  - PNY RTX 2060 6GB
+                  - Radeon RX 580 8GB
+              required:
+              - graphic_card_description
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  graphic_card_description:
+                    enum:
+                    - Gigabyte Geforce GTX 1060 6GB
+                    - PNY RTX 2060 6GB
+                    - Radeon RX 580 8GB
+                required:
+                - graphic_card_description
+          description: ''
+    patch:
+      operationId: partial_updateGraphicCard
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this graphic card.
+        schema:
+          type: string
+      - name: graphic_card_description
+        required: false
+        in: query
+        description: graphic_card_description
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                graphic_card_description:
+                  enum:
+                  - Gigabyte Geforce GTX 1060 6GB
+                  - PNY RTX 2060 6GB
+                  - Radeon RX 580 8GB
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  graphic_card_description:
+                    enum:
+                    - Gigabyte Geforce GTX 1060 6GB
+                    - PNY RTX 2060 6GB
+                    - Radeon RX 580 8GB
+                required:
+                - graphic_card_description
+          description: ''
+    delete:
+      operationId: destroyGraphicCard
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this graphic card.
+        schema:
+          type: string
+      - name: graphic_card_description
+        required: false
+        in: query
+        description: graphic_card_description
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /computers/:
+    get:
+      operationId: listComputers
+      parameters:
+      - name: processor_id
+        required: false
+        in: query
+        description: processor_id
+        schema:
+          type: string
+      - name: motherboard_id
+        required: false
+        in: query
+        description: motherboard_id
+        schema:
+          type: string
+      - name: memory_id
+        required: false
+        in: query
+        description: memory_id
+        schema:
+          type: string
+      - name: graphic_card_id
+        required: false
+        in: query
+        description: graphic_card_id
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    processor_id:
+                      type: integer
+                    motherboard_id:
+                      type: integer
+                    graphic_card_id:
+                      type: integer
+                      nullable: true
+                    memory_id:
+                      type: array
+                      items:
+                        type: integer
+                  required:
+                  - processor_id
+                  - motherboard_id
+                  - memory_id
+          description: ''
+    post:
+      operationId: createComputer
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                processor_id:
+                  type: integer
+                motherboard_id:
+                  type: integer
+                graphic_card_id:
+                  type: integer
+                  nullable: true
+                memory_id:
+                  type: array
+                  items:
+                    type: integer
+              required:
+              - processor_id
+              - motherboard_id
+              - memory_id
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  processor_id:
+                    type: integer
+                  motherboard_id:
+                    type: integer
+                  graphic_card_id:
+                    type: integer
+                    nullable: true
+                  memory_id:
+                    type: array
+                    items:
+                      type: integer
+                required:
+                - processor_id
+                - motherboard_id
+                - memory_id
+          description: ''
+  /computers/{id}/:
+    get:
+      operationId: retrieveComputer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this computer.
+        schema:
+          type: string
+      - name: processor_id
+        required: false
+        in: query
+        description: processor_id
+        schema:
+          type: string
+      - name: motherboard_id
+        required: false
+        in: query
+        description: motherboard_id
+        schema:
+          type: string
+      - name: memory_id
+        required: false
+        in: query
+        description: memory_id
+        schema:
+          type: string
+      - name: graphic_card_id
+        required: false
+        in: query
+        description: graphic_card_id
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  processor_id:
+                    type: integer
+                  motherboard_id:
+                    type: integer
+                  graphic_card_id:
+                    type: integer
+                    nullable: true
+                  memory_id:
+                    type: array
+                    items:
+                      type: integer
+                required:
+                - processor_id
+                - motherboard_id
+                - memory_id
+          description: ''
+    put:
+      operationId: updateComputer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this computer.
+        schema:
+          type: string
+      - name: processor_id
+        required: false
+        in: query
+        description: processor_id
+        schema:
+          type: string
+      - name: motherboard_id
+        required: false
+        in: query
+        description: motherboard_id
+        schema:
+          type: string
+      - name: memory_id
+        required: false
+        in: query
+        description: memory_id
+        schema:
+          type: string
+      - name: graphic_card_id
+        required: false
+        in: query
+        description: graphic_card_id
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                processor_id:
+                  type: integer
+                motherboard_id:
+                  type: integer
+                graphic_card_id:
+                  type: integer
+                  nullable: true
+                memory_id:
+                  type: array
+                  items:
+                    type: integer
+              required:
+              - processor_id
+              - motherboard_id
+              - memory_id
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  processor_id:
+                    type: integer
+                  motherboard_id:
+                    type: integer
+                  graphic_card_id:
+                    type: integer
+                    nullable: true
+                  memory_id:
+                    type: array
+                    items:
+                      type: integer
+                required:
+                - processor_id
+                - motherboard_id
+                - memory_id
+          description: ''
+    patch:
+      operationId: partial_updateComputer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this computer.
+        schema:
+          type: string
+      - name: processor_id
+        required: false
+        in: query
+        description: processor_id
+        schema:
+          type: string
+      - name: motherboard_id
+        required: false
+        in: query
+        description: motherboard_id
+        schema:
+          type: string
+      - name: memory_id
+        required: false
+        in: query
+        description: memory_id
+        schema:
+          type: string
+      - name: graphic_card_id
+        required: false
+        in: query
+        description: graphic_card_id
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                processor_id:
+                  type: integer
+                motherboard_id:
+                  type: integer
+                graphic_card_id:
+                  type: integer
+                  nullable: true
+                memory_id:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  processor_id:
+                    type: integer
+                  motherboard_id:
+                    type: integer
+                  graphic_card_id:
+                    type: integer
+                    nullable: true
+                  memory_id:
+                    type: array
+                    items:
+                      type: integer
+                required:
+                - processor_id
+                - motherboard_id
+                - memory_id
+          description: ''
+    delete:
+      operationId: destroyComputer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this computer.
+        schema:
+          type: string
+      - name: processor_id
+        required: false
+        in: query
+        description: processor_id
+        schema:
+          type: string
+      - name: motherboard_id
+        required: false
+        in: query
+        description: motherboard_id
+        schema:
+          type: string
+      - name: memory_id
+        required: false
+        in: query
+        description: memory_id
+        schema:
+          type: string
+      - name: graphic_card_id
+        required: false
+        in: query
+        description: graphic_card_id
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /orders/:
+    get:
+      operationId: listOrders
+      parameters:
+      - name: computer_id
+        required: false
+        in: query
+        description: computer_id
+        schema:
+          type: string
+      - name: user_id
+        required: false
+        in: query
+        description: user_id
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    user_id:
+                      type: integer
+                    computer_id:
+                      type: array
+                      items:
+                        type: integer
+                  required:
+                  - user_id
+                  - computer_id
+          description: ''
+    post:
+      operationId: createOrder
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                user_id:
+                  type: integer
+                computer_id:
+                  type: array
+                  items:
+                    type: integer
+              required:
+              - user_id
+              - computer_id
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  user_id:
+                    type: integer
+                  computer_id:
+                    type: array
+                    items:
+                      type: integer
+                required:
+                - user_id
+                - computer_id
+          description: ''
+  /orders/{id}/:
+    get:
+      operationId: retrieveOrder
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this order.
+        schema:
+          type: string
+      - name: computer_id
+        required: false
+        in: query
+        description: computer_id
+        schema:
+          type: string
+      - name: user_id
+        required: false
+        in: query
+        description: user_id
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  user_id:
+                    type: integer
+                  computer_id:
+                    type: array
+                    items:
+                      type: integer
+                required:
+                - user_id
+                - computer_id
+          description: ''
+    put:
+      operationId: updateOrder
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this order.
+        schema:
+          type: string
+      - name: computer_id
+        required: false
+        in: query
+        description: computer_id
+        schema:
+          type: string
+      - name: user_id
+        required: false
+        in: query
+        description: user_id
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                user_id:
+                  type: integer
+                computer_id:
+                  type: array
+                  items:
+                    type: integer
+              required:
+              - user_id
+              - computer_id
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  user_id:
+                    type: integer
+                  computer_id:
+                    type: array
+                    items:
+                      type: integer
+                required:
+                - user_id
+                - computer_id
+          description: ''
+    patch:
+      operationId: partial_updateOrder
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this order.
+        schema:
+          type: string
+      - name: computer_id
+        required: false
+        in: query
+        description: computer_id
+        schema:
+          type: string
+      - name: user_id
+        required: false
+        in: query
+        description: user_id
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                user_id:
+                  type: integer
+                computer_id:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  user_id:
+                    type: integer
+                  computer_id:
+                    type: array
+                    items:
+                      type: integer
+                required:
+                - user_id
+                - computer_id
+          description: ''
+    delete:
+      operationId: destroyOrder
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this order.
+        schema:
+          type: string
+      - name: computer_id
+        required: false
+        in: query
+        description: computer_id
+        schema:
+          type: string
+      - name: user_id
+        required: false
+        in: query
+        description: user_id
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /users/:
+    get:
+      operationId: listUsers
+      parameters:
+      - name: password
+        required: false
+        in: query
+        description: password
+        schema:
+          type: string
+      - name: last_login
+        required: false
+        in: query
+        description: last_login
+        schema:
+          type: string
+      - name: is_superuser
+        required: false
+        in: query
+        description: is_superuser
+        schema:
+          type: string
+      - name: groups
+        required: false
+        in: query
+        description: groups
+        schema:
+          type: string
+      - name: user_permissions
+        required: false
+        in: query
+        description: user_permissions
+        schema:
+          type: string
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: first_name
+        required: false
+        in: query
+        description: first_name
+        schema:
+          type: string
+      - name: last_name
+        required: false
+        in: query
+        description: last_name
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
+        schema:
+          type: string
+      - name: is_staff
+        required: false
+        in: query
+        description: is_staff
+        schema:
+          type: string
+      - name: is_active
+        required: false
+        in: query
+        description: is_active
+        schema:
+          type: string
+      - name: date_joined
+        required: false
+        in: query
+        description: date_joined
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    username:
+                      type: string
+                      description: Required. 150 characters or fewer. Letters, digits
+                        and @/./+/-/_ only.
+                      pattern: ^[\w.@+-]+$
+                      maxLength: 150
+                  required:
+                  - username
+          description: ''
+    post:
+      operationId: createUser
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                username:
+                  type: string
+                  description: Required. 150 characters or fewer. Letters, digits
+                    and @/./+/-/_ only.
+                  pattern: ^[\w.@+-]+$
+                  maxLength: 150
+              required:
+              - username
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  username:
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+$
+                    maxLength: 150
+                required:
+                - username
+          description: ''
+  /users/{id}/:
+    get:
+      operationId: retrieveUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      - name: password
+        required: false
+        in: query
+        description: password
+        schema:
+          type: string
+      - name: last_login
+        required: false
+        in: query
+        description: last_login
+        schema:
+          type: string
+      - name: is_superuser
+        required: false
+        in: query
+        description: is_superuser
+        schema:
+          type: string
+      - name: groups
+        required: false
+        in: query
+        description: groups
+        schema:
+          type: string
+      - name: user_permissions
+        required: false
+        in: query
+        description: user_permissions
+        schema:
+          type: string
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: first_name
+        required: false
+        in: query
+        description: first_name
+        schema:
+          type: string
+      - name: last_name
+        required: false
+        in: query
+        description: last_name
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
+        schema:
+          type: string
+      - name: is_staff
+        required: false
+        in: query
+        description: is_staff
+        schema:
+          type: string
+      - name: is_active
+        required: false
+        in: query
+        description: is_active
+        schema:
+          type: string
+      - name: date_joined
+        required: false
+        in: query
+        description: date_joined
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  username:
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+$
+                    maxLength: 150
+                required:
+                - username
+          description: ''
+    put:
+      operationId: updateUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      - name: password
+        required: false
+        in: query
+        description: password
+        schema:
+          type: string
+      - name: last_login
+        required: false
+        in: query
+        description: last_login
+        schema:
+          type: string
+      - name: is_superuser
+        required: false
+        in: query
+        description: is_superuser
+        schema:
+          type: string
+      - name: groups
+        required: false
+        in: query
+        description: groups
+        schema:
+          type: string
+      - name: user_permissions
+        required: false
+        in: query
+        description: user_permissions
+        schema:
+          type: string
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: first_name
+        required: false
+        in: query
+        description: first_name
+        schema:
+          type: string
+      - name: last_name
+        required: false
+        in: query
+        description: last_name
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
+        schema:
+          type: string
+      - name: is_staff
+        required: false
+        in: query
+        description: is_staff
+        schema:
+          type: string
+      - name: is_active
+        required: false
+        in: query
+        description: is_active
+        schema:
+          type: string
+      - name: date_joined
+        required: false
+        in: query
+        description: date_joined
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                username:
+                  type: string
+                  description: Required. 150 characters or fewer. Letters, digits
+                    and @/./+/-/_ only.
+                  pattern: ^[\w.@+-]+$
+                  maxLength: 150
+              required:
+              - username
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  username:
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+$
+                    maxLength: 150
+                required:
+                - username
+          description: ''
+    patch:
+      operationId: partial_updateUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      - name: password
+        required: false
+        in: query
+        description: password
+        schema:
+          type: string
+      - name: last_login
+        required: false
+        in: query
+        description: last_login
+        schema:
+          type: string
+      - name: is_superuser
+        required: false
+        in: query
+        description: is_superuser
+        schema:
+          type: string
+      - name: groups
+        required: false
+        in: query
+        description: groups
+        schema:
+          type: string
+      - name: user_permissions
+        required: false
+        in: query
+        description: user_permissions
+        schema:
+          type: string
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: first_name
+        required: false
+        in: query
+        description: first_name
+        schema:
+          type: string
+      - name: last_name
+        required: false
+        in: query
+        description: last_name
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
+        schema:
+          type: string
+      - name: is_staff
+        required: false
+        in: query
+        description: is_staff
+        schema:
+          type: string
+      - name: is_active
+        required: false
+        in: query
+        description: is_active
+        schema:
+          type: string
+      - name: date_joined
+        required: false
+        in: query
+        description: date_joined
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                username:
+                  type: string
+                  description: Required. 150 characters or fewer. Letters, digits
+                    and @/./+/-/_ only.
+                  pattern: ^[\w.@+-]+$
+                  maxLength: 150
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  username:
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+$
+                    maxLength: 150
+                required:
+                - username
+          description: ''
+    delete:
+      operationId: destroyUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      - name: password
+        required: false
+        in: query
+        description: password
+        schema:
+          type: string
+      - name: last_login
+        required: false
+        in: query
+        description: last_login
+        schema:
+          type: string
+      - name: is_superuser
+        required: false
+        in: query
+        description: is_superuser
+        schema:
+          type: string
+      - name: groups
+        required: false
+        in: query
+        description: groups
+        schema:
+          type: string
+      - name: user_permissions
+        required: false
+        in: query
+        description: user_permissions
+        schema:
+          type: string
+      - name: username
+        required: false
+        in: query
+        description: username
+        schema:
+          type: string
+      - name: first_name
+        required: false
+        in: query
+        description: first_name
+        schema:
+          type: string
+      - name: last_name
+        required: false
+        in: query
+        description: last_name
+        schema:
+          type: string
+      - name: email
+        required: false
+        in: query
+        description: email
+        schema:
+          type: string
+      - name: is_staff
+        required: false
+        in: query
+        description: is_staff
+        schema:
+          type: string
+      - name: is_active
+        required: false
+        in: query
+        description: is_active
+        schema:
+          type: string
+      - name: date_joined
+        required: false
+        in: query
+        description: date_joined
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
