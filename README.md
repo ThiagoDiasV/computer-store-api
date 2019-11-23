@@ -4,7 +4,15 @@
 
 ### Using Dockerfile and docker-compose
 
-Clone this repository at a root directory and after this, access the silvertec directory:
+First, you need to run dockerd:
+
+    root $ dockerd
+
+OR
+
+    root $ sudo dockerd
+
+Now, clone this repository at a root directory and after this, access the silvertec directory:
     
     root $ cd silvertec
 
