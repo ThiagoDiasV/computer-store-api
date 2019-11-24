@@ -47,7 +47,7 @@ After installing requirements, go to backend directory and run:
 
 You can use Silvertec Rest API at Heroku deployed app:
 
-    https://silvertec.herokuapp.com/
+https://silvertec.herokuapp.com/
 
 ## Run the tests
 
