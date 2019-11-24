@@ -43,6 +43,12 @@ After installing requirements, go to backend directory and run:
     (venv) root/silvertec/backend $ python manage.py migrate
     (venv) root/silvertec/backend $ python manage.py runserver
 
+### Deployed API
+
+You can use Silvertec Rest API at Heroku deployed app:
+
+    https://silvertec.herokuapp.com/
+
 ## Run the tests
 
 You can cover Silvertec API with unit tests running:
