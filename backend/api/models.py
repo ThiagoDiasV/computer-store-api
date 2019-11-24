@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import m2m_changed
 
 
 class Processor(models.Model):
@@ -92,11 +94,18 @@ class Computer(models.Model):
     graphic_card_id = models.ForeignKey(
         GraphicCard, on_delete=models.CASCADE, null=True, blank=False
     )
+    computer_str_repr = models.CharField(
+        "Computer description", max_length=200, editable=False
+    )
 
-    def __str__(self):
-        data = self.memory_id.values()
+    def get_str_representation_of_computer(self):
+        """
+        To show a computer representation in frontend application
+        and to show a __str__ of computer in DRF front end.
+        """
+        data = Computer.objects.get(pk=self.id).memory_id
         total_ram = 0
-        for memory in data:
+        for memory in data.values():
             total_ram += memory["ram_size"]
         base_string = (
             f"{self.motherboard_id} {self.processor_id} {total_ram}GB"
@@ -104,6 +113,15 @@ class Computer(models.Model):
         if self.graphic_card_id is not None:
             return f"{base_string} {self.graphic_card_id}"
         return f"{base_string}"
+
+    def __str__(self):
+        return self.get_str_representation_of_computer()
+
+
+# When a M2M relationship is set in Computer.memory_id this function is called
+@receiver(m2m_changed, sender=Computer.memory_id.through)
+def post_save_computer(sender, instance, **kwargs):
+    instance.computer_str_repr = instance.get_str_representation_of_computer()
 
 
 class Order(models.Model):
