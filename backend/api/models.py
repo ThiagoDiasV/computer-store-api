@@ -118,10 +118,12 @@ class Computer(models.Model):
         return self.get_str_representation_of_computer()
 
 
+
 # When a M2M relationship is set in Computer.memory_id this function is called
 @receiver(m2m_changed, sender=Computer.memory_id.through)
 def post_save_computer(sender, instance, **kwargs):
     instance.computer_str_repr = instance.get_str_representation_of_computer()
+    instance.save()
 
 
 class Order(models.Model):
