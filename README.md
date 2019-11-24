@@ -38,10 +38,10 @@ Prefer to create a Python virtual environment and then
 
     (venv) root/silvertec $  pip install -r requirements.txt
 
-After installing requirements, go to silvertec directory and run:
+After installing requirements, go to backend directory and run:
 
-    (venv) root/silvertec $ python manage.py migrate
-    (venv) root/silvertec $ python manage.py runserver
+    (venv) root/silvertec/backend $ python manage.py migrate
+    (venv) root/silvertec/backend $ python manage.py runserver
 
 ## Run the tests
 
