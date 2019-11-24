@@ -1,1 +1,1 @@
-web: gunicorn backend.silvertec.wsgi
+web: gunicorn silvertec.wsgi
