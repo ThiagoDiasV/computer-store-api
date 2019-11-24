@@ -4,7 +4,7 @@
 
 ### Using Dockerfile and docker-compose
 
-First, you need to run dockerd:
+First you need to init a daemon with dockerd, so run dockerd:
 
     root $ dockerd
 
@@ -12,13 +12,13 @@ OR
 
     root $ sudo dockerd
 
-Now, clone this repository at a root directory and after this, access the silvertec directory:
+Now, clone this repository at a root directory and after this, access the silvertec/backend directory:
     
-    root $ cd silvertec
+    root $ cd silvertec/backend
 
 And then with Docker and docker-compose, do:
 
-    root/silvertec $ docker-compose up --build
+    root/silvertec/backend $ docker-compose up --build
 
 This command above will: 
 - Create and migrate database 
@@ -28,17 +28,17 @@ This command above will:
 Now you will be able to navigate through the Silvertec API.
 To have authenticated user permissions, please open other terminal instance at root container directory and create a super user using python manage.py inside the container:
 
-    root/silvertec $ docker exec -it silvertec python silvertec/manage.py createsuperuser
+    root/silvertec/backend $ docker exec -it silvertec python manage.py createsuperuser
 
 ### Using Python 3.7
 
 Prefer to create a Python virtual environment and then
 
-    (venv) root $ cd silvertec
+    (venv) root $ cd silvertec/backend
 
-    (venv) root/silvertec $  pip install -r requirements.txt
+    (venv) root/silvertec/backend $  pip install -r requirements.txt
 
-After installing requirements, go to backend directory and run:
+After installing requirements run:
 
     (venv) root/silvertec/backend $ python manage.py migrate
     (venv) root/silvertec/backend $ python manage.py runserver
@@ -47,7 +47,7 @@ After installing requirements, go to backend directory and run:
 
 You can use Silvertec Rest API at Heroku deployed app:
 
-https://silvertec.herokuapp.com/
+#### https://silvertec.herokuapp.com/
 
 ## Run the tests
 
@@ -55,7 +55,7 @@ You can cover Silvertec API with unit tests running:
 
 ### Using Docker
 
-    root/silvertec $ docker exec -it silvertec python silvertec/manage.py test api.tests
+    root/silvertec/backend $ docker exec -it silvertec python manage.py test api.tests
 
 ### Using Python 3.7
 
