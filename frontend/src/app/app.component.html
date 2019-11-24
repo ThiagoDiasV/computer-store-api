@@ -1,0 +1,18 @@
+<div style="text-align:center">
+  <h3>
+    Pedidos feitos na Silvertec Computer Store
+  </h3>
+</div>
+<ul>
+  <li *ngFor="let order of orders">
+    <h4>Pedido {{ order.id }}</h4>
+    <p>Id do cliente: {{ order.user_id }}</p>
+    <ul>
+      <h5>Quantidade de computadores no pedido de número ({{ order.id }}): {{ order.computer_id.length }}</h5>
+      <li *ngFor="let computer of order.computer_id" >
+      </li>
+    </ul>
+  </li>
+</ul>
+{{ computers | json }}
+{{ error?.message }}
