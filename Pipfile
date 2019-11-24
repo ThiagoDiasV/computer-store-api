@@ -6,9 +6,16 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django = "*"
-djangorestframework = "*"
+djangorestframework = "==3.10.3"
 httpie = "*"
+coreapi = "==2.3.3"
+django-coreapi = "==2.3.0"
+django-cors-headers = "==3.2.0"
+django-filter = "==2.2.0"
+django-heroku = "==0.3.1"
+drf-yasg = "==1.17.0"
+model-bakery = "==1.0.2"
+Django = "==2.2.7"
 
 [requires]
 python_version = "3.7"
