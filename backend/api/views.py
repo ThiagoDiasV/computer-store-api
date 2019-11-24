@@ -17,9 +17,6 @@ from .serializers import (
     OrderSerializer,
 )
 from rest_framework import permissions, viewsets
-from rest_framework.views import APIView
-from rest_framework.renderers import TemplateHTMLRenderer
-from rest_framework.response import Response
 
 
 class IsAdminUserOrReadOnly(permissions.IsAdminUser):
@@ -72,14 +69,3 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     filter_fields = "__all__"
-
-
-class Index(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = "index.html"
-
-    def get(self, request):
-        queryset = Processor.objects.all()
-
-        # from ipdb import set_trace; set_trace()
-        return Response({"orders": queryset})
