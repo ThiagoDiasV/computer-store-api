@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).parent
 
 try:
     SECRET_KEY = config('SECRET_KEY')
-except UndefinedValueError:  # Secret issue, just for demo purpose
+except UndefinedValueError:  # Security issue, just for demo purpose
     SECRET_KEY = 'mydemokey'
 
 DEBUG = config('DEBUG', default=False, cast=bool)
