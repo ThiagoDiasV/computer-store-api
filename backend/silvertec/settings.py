@@ -9,9 +9,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# Heroku Secret Key is different than this
 SECRET_KEY = "q@ggdc!4jdldz8(b+dq#yth(2rfal*iopz&slup7n!3qt&q8t*"
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# Heroku web app DEBUG = False
 DEBUG = True
 
 # SECURITY ISSUE: this is only for demo purposes

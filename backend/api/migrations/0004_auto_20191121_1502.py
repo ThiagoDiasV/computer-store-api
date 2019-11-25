@@ -3,7 +3,7 @@
 from django.db import migrations
 
 
-def create_memories(apps, schema_editor):
+def create_memories(apps, schema_editor) -> None:
     """
     Create memories to populate database.
     """

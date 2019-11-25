@@ -16,10 +16,11 @@ from .validations import (
     validate_total_ram_ordered_and_motherboard_ram_support,
     validate_graphic_card_or_not_in_motherboard,
 )
+from collections import OrderedDict
 
 
 class ProcessorSerializer(serializers.ModelSerializer):
-    def validate(self, data):
+    def validate(self, data: OrderedDict) -> OrderedDict:
         validate_processor(data)
         return data
 
@@ -29,7 +30,7 @@ class ProcessorSerializer(serializers.ModelSerializer):
 
 
 class MotherBoardSerializer(serializers.ModelSerializer):
-    def validate(self, data):
+    def validate(self, data: OrderedDict) -> OrderedDict:
         validate_motherboard(data)
         return data
 
@@ -51,7 +52,7 @@ class GraphicCardSerializer(serializers.ModelSerializer):
 
 
 class ComputerSerializer(serializers.ModelSerializer):
-    def validate(self, data):
+    def validate(self, data: OrderedDict) -> OrderedDict:
         validate_processor_compatibility_with_motherboard(data)
         validate_memory_cards_and_motherboard_ram_slots(data)
         validate_total_ram_ordered_and_motherboard_ram_support(data),
@@ -71,7 +72,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    def validate(self, data):
+    def validate(self, data: OrderedDict) -> OrderedDict:
         return data
 
     class Meta:

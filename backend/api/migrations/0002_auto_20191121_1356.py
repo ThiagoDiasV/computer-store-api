@@ -3,7 +3,7 @@
 from django.db import migrations
 
 
-def create_processors(apps, schema_editor):
+def create_processors(apps, schema_editor) -> None:
     """
     Creates processors to populate database.
     """

@@ -3,7 +3,7 @@
 from django.db import migrations
 
 
-def create_motherboards(apps, schema_editor):
+def create_motherboards(apps, schema_editor) -> None:
     """
     Create motherboards to populate database.
     """

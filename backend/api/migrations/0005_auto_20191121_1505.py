@@ -3,7 +3,7 @@
 from django.db import migrations
 
 
-def create_graphic_cards(apps, schema_editor):
+def create_graphic_cards(apps, schema_editor) -> None:
     """
     Create graphic cards to populate database.
     """

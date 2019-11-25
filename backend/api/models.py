@@ -22,7 +22,7 @@ class Processor(models.Model):
         max_length=10, choices=processor_brands_choices
     )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.processor_description}"
 
 
@@ -55,7 +55,7 @@ class MotherBoard(models.Model):
     )
     integrated_graphic = models.BooleanField()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.motherboard_description}"
 
 
@@ -68,7 +68,7 @@ class Memory(models.Model):
 
     ram_size = models.PositiveIntegerField(choices=sizes_choices)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.ram_description} {self.ram_size} GB"
 
 
@@ -83,7 +83,7 @@ class GraphicCard(models.Model):
         max_length=100, choices=graphic_card_choices
     )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.graphic_card_description}"
 
 
@@ -98,7 +98,7 @@ class Computer(models.Model):
         "Computer description", max_length=200, editable=False
     )
 
-    def get_str_representation_of_computer(self):
+    def get_str_representation_of_computer(self) -> str:
         """
         To show a computer representation in frontend application
         and to show a __str__ of computer in DRF front end.
@@ -114,14 +114,18 @@ class Computer(models.Model):
             return f"{base_string} {self.graphic_card_id}"
         return f"{base_string}"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.get_str_representation_of_computer()
-
 
 
 # When a M2M relationship is set in Computer.memory_id this function is called
 @receiver(m2m_changed, sender=Computer.memory_id.through)
-def post_save_computer(sender, instance, **kwargs):
+def computer_str_repr_after_m2m_changed(sender, instance, **kwargs) -> None:
+    """
+    In order to ease the use of API this function was made and save a string
+    representation of a computer instance after the change of a
+    manytomanyrelationship.
+    """
     instance.computer_str_repr = instance.get_str_representation_of_computer()
     instance.save()
 
@@ -130,5 +134,5 @@ class Order(models.Model):
     computer_id = models.ManyToManyField(Computer)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"User: {self.user_id} Computer: {self.computer_id}"

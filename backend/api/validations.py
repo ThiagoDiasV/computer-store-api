@@ -1,7 +1,8 @@
 from rest_framework import serializers
+from collections import OrderedDict
 
 
-def validate_processor(data) -> None:
+def validate_processor(data: OrderedDict) -> None:
     """
     Validate processor specifications when adding to database.
     """
@@ -17,7 +18,7 @@ def validate_processor(data) -> None:
         )
 
 
-def validate_motherboard(data) -> None:
+def validate_motherboard(data: OrderedDict) -> None:
     """
     Validate motherboard specifications when adding to database.
     """
@@ -65,7 +66,7 @@ def validate_motherboard(data) -> None:
             )
 
 
-def validate_processor_compatibility_with_motherboard(data) -> None:
+def validate_processor_compatibility_with_motherboard(data: OrderedDict) -> None:
     """
     If processor is incompatible with motherboard this validation function
     raises an exception.
@@ -83,7 +84,7 @@ def validate_processor_compatibility_with_motherboard(data) -> None:
             )
 
 
-def validate_memory_cards_and_motherboard_ram_slots(data) -> None:
+def validate_memory_cards_and_motherboard_ram_slots(data: OrderedDict) -> None:
     """
     If the quantity of ram memory cards chosen is greater than
     the motherboard ram slots, this validation function raises an
@@ -101,7 +102,7 @@ def validate_memory_cards_and_motherboard_ram_slots(data) -> None:
         )
 
 
-def validate_total_ram_ordered_and_motherboard_ram_support(data) -> None:
+def validate_total_ram_ordered_and_motherboard_ram_support(data: OrderedDict) -> None:
     """
     If the total of ordered ram is greater than the motherboard ram support
     this validation function raises an exception.
@@ -120,7 +121,7 @@ def validate_total_ram_ordered_and_motherboard_ram_support(data) -> None:
         )
 
 
-def validate_graphic_card_or_not_in_motherboard(data) -> None:
+def validate_graphic_card_or_not_in_motherboard(data: OrderedDict) -> None:
     """
     If the chosen motherboard does not have integrated video the
     client must choose a graphic card. On the other hand, if the 
