@@ -123,7 +123,7 @@ REST_FRAMEWORK = {
     ]
 }
 
-CORS_ORIGIN_WHITELIST = ("https://angularsilvertec.herokuapp.com/",)
+CORS_ORIGIN_WHITELIST = ("http://localhost:4200", "https://angularsilvertec.herokuapp.com/",)
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
