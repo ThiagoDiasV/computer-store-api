@@ -47,6 +47,8 @@ After installing requirements run:
     (venv) root/silvertec/backend $ python manage.py migrate
     (venv) root/silvertec/backend $ python manage.py runserver
 
+Obs: if you already tested running server using Docker and docker-compose, please delete sqlite database generated locally by docker to migrate database correctly using local Python. 
+
 ### Deployed API
 
 You can use Silvertec Rest API at Heroku deployed app:
