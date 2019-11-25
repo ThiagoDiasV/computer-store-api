@@ -24,7 +24,7 @@ And then with Docker and docker-compose, run:
 
 This command above will run the server automatically with `ng serve` command. Navigate to `http://localhost:4200/` to take a look at frontend part of Silvertec Rest API Challenge. 
 
-The single page application will consume the Silvertec Rest API at https://silvertec.herokuapp.com/ so, due to Heroku free applications characteristics, wait a little bit to wake up the Heroku Dyno. 
+The single page application will consume the Silvertec Rest API at https://silvertec.herokuapp.com/ so, due to Heroku free applications characteristics, wait a little bit because Heroku Dyno sleeps after certain time. 
 
 ### Using local Angular environment
 
