@@ -17,6 +17,8 @@ drf-yasg = "==1.17.0"
 model-bakery = "==1.0.2"
 Django = "==2.2.7"
 gunicorn = "==20.0.2"
+python-decouple = "==3.3"
+Unipath = "==1.1"
 
 [requires]
 python_version = "3.7"
