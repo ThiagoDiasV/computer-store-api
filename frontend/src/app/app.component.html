@@ -1,23 +1,17 @@
 <div class="container">
-  <h2>Computadores montados</h2>
+  <h1>Pedidos Efetuados</h1>
   <ul>
-    <li *ngFor="let computer of computers">
-      <h4>Computador {{ computer.id }}</h4>
-      <h6>{{ computer.computer_str_repr }}</h6>
-    </li>
-  </ul>
-</div>
-
-<div class="container">
-  <h2>Pedidos feitos</h2>
-  <ul>
-    <li *ngFor="let order of orders" >
-      <h4>Pedido {{ order.id }}</h4>
-      <p>ID Cliente {{ order.user_id }}</p> 
-      <p>ID computadores {{ order.computer_id }}</p> 
-      <p>Conjunto computadores {{ order.computer_id.values() }}</p>
-      <ul>
-      </ul>
+    <li *ngFor="let order of orders">
+        <h3>Pedido nº: {{ order.id }}</h3>
+        <ng-container *ngFor="let user of users" >
+          <h3 *ngIf="order.user_id === user.id" >Usuário: {{ user.username }}</h3>
+        </ng-container>
+        Número usuário {{ order.user_id }}
+        <ng-container *ngFor="let order_computer_id of order.computer_id">
+          <div *ngFor="let computer of computers">
+            <p *ngIf="computer.id === order_computer_id"> {{ computer.computer_str_repr }} </p>
+          </div>
+        </ng-container>
     </li>
   </ul>
 </div>

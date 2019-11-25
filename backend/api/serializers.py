@@ -67,8 +67,7 @@ class ComputerSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("username",)
-        user_id = serializers.ReadOnlyField(source="user_id.username")
+        fields = ("username", "id")
 
 
 class OrderSerializer(serializers.ModelSerializer):
