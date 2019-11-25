@@ -1,29 +1,18 @@
 import os
 import django_heroku
-from decouple import config, UndefinedValueError
-from unipath import Path
-from dj_database_url import parse as db_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = Path(__file__).parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-try:
-    SECRET_KEY = config('SECRET_KEY')
-except UndefinedValueError:  # Security issue, just for demo purpose
-    SECRET_KEY = 'mydemokey'
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = "q@ggdc!4jdldz8(b+dq#yth(2rfal*iopz&slup7n!3qt&q8t*"
 
-DEBUG = config('DEBUG', default=False, cast=bool)
-TEMPLATE_DEBUG = DEBUG
-
-EMAIL_HOST = config('EMAIL_HOST', default='localhost')
-EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
 
 # SECURITY ISSUE: this is only for demo purposes
 ALLOWED_HOSTS = ["*"]
