@@ -12,7 +12,6 @@ schema_view = get_schema_view(
         title="Silvertec Rest API",
         default_version="1.0",
         description="Rest API for Silvertec Computer Store",
-        terms_of_service="https://www.google.com/policies/terms/",
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),
