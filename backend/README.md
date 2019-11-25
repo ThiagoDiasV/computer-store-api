@@ -1,4 +1,4 @@
-# Silvertec Rest API Challenge
+# Silvertec Rest API Challenge - Backend
 
 ## Install and run
 
@@ -16,7 +16,7 @@ Now, clone this repository at a root directory and after this, access the silver
     
     root $ cd silvertec/backend
 
-And then with Docker and docker-compose, do:
+And then with Docker and docker-compose, run:
 
     root/silvertec/backend $ docker-compose up --build
 
@@ -30,7 +30,11 @@ To have authenticated user permissions, please open other terminal instance at r
 
     root/silvertec/backend $ docker exec -it silvertec python manage.py createsuperuser
 
-### Using Python 3.7
+After this, to stop the created container:
+
+    root/silvertec/backend $ docker-compose down
+
+### Using local Python 3.7
 
 Prefer to create a Python virtual environment and then
 
@@ -57,7 +61,7 @@ You can cover Silvertec API with unit tests running:
 
     root/silvertec/backend $ docker exec -it silvertec python manage.py test api.tests
 
-### Using Python 3.7
+### Using Python 3.7 
 
     (venv) root/silvertec $ python manage.py test
 

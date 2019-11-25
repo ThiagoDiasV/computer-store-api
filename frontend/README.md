@@ -1,27 +1,43 @@
-# Frontend
+# Silvertec Rest API Challenge - Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
 
-## Development server
+## Install and run
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Using Dockerfile and docker-compose
 
-## Code scaffolding
+First you need to init a daemon with dockerd, so run dockerd:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    root $ dockerd
 
-## Build
+OR
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+    root $ sudo dockerd
 
-## Running unit tests
+Now, clone this repository at a root directory and after this, access the silvertec/frontend directory:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    root $ cd silvertec/frontend
 
-## Running end-to-end tests
+And then with Docker and docker-compose, run:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+    root/silvertec/frontend $ docker-compose up --build
 
-## Further help
+This command above will run the server automatically with `ng serve` command. Navigate to `http://localhost:4200/` to take a look at frontend part of Silvertec Rest API Challenge. 
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+The single page application will consume the Silvertec Rest API at https://silvertec.herokuapp.com/ so, due to Heroku free applications characteristics, wait a little bit to wake up the Heroku Dyno. 
+
+### Using local Angular environment
+
+Proceed to `root/silvertec/frontend` and run:
+
+     root/silvertec/frontend $ npm install @angular/cli
+     root/silvertec/frontend $ ng serve
+
+Now you'll see the Angular SPA consuming Silvertec Rest API.
+
+### Deployed Frontend
+
+You too can take a look at Angular single page application consuming the Silvertec Rest API at Heroku deployed app:
+
+#### https://angularsilvertec.herokuapp.com
+
