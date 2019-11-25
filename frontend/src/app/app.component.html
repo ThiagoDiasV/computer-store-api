@@ -7,3 +7,17 @@
     </li>
   </ul>
 </div>
+
+<div class="container">
+  <h2>Pedidos feitos</h2>
+  <ul>
+    <li *ngFor="let order of orders" >
+      <h4>Pedido {{ order.id }}</h4>
+      <p>ID Cliente {{ order.user_id }}</p> 
+      <p>ID conjunto computadores {{ order.computer_id }}</p> 
+      <p>Conjunto computadores {{ order.computer_id.values() }}</p>
+      <ul>
+      </ul>
+    </li>
+  </ul>
+</div>
