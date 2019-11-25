@@ -47,7 +47,7 @@ After installing requirements run:
     (venv) root/silvertec/backend $ python manage.py migrate
     (venv) root/silvertec/backend $ python manage.py runserver
 
-Obs: if you already tested running server using Docker and docker-compose, please delete sqlite database generated locally by docker to migrate database correctly using local Python. 
+Obs: if you already tested running server using Docker and docker-compose, please delete sqlite database generated locally by docker-compose to migrate database correctly using local Python. 
 
 ### Deployed API
 
