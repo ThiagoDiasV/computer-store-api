@@ -14,7 +14,7 @@ SECRET_KEY = "q@ggl!4jdldz8(b*dc+dq#y&q8tiopz&slup7nth(2rfa!3qtiopz&slup7nth(2rf
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Heroku web app DEBUG = False
-DEBUG = False
+DEBUG = True
 
 # SECURITY ISSUE: this is only for demo purposes
 ALLOWED_HOSTS = ["*"]
