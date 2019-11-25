@@ -2,16 +2,18 @@
   <h1>Pedidos Efetuados</h1>
   <ul>
     <li *ngFor="let order of orders">
-        <h3>Pedido nº: {{ order.id }}</h3>
+        <h4>Nº pedido: {{ order.id }}</h4>
         <ng-container *ngFor="let user of users" >
-          <h3 *ngIf="order.user_id === user.id" >Usuário: {{ user.username }}</h3>
+          <h5 *ngIf="order.user_id === user.id" >Login usuário: {{ user.username }}</h5>
         </ng-container>
-        Número usuário {{ order.user_id }}
+        <h5>Produtos do pedido</h5>
+        <hr>
         <ng-container *ngFor="let order_computer_id of order.computer_id">
           <div *ngFor="let computer of computers">
-            <p *ngIf="computer.id === order_computer_id"> {{ computer.computer_str_repr }} </p>
+            <p *ngIf="computer.id === order_computer_id">Produto: {{ computer.computer_str_repr }} </p>
           </div>
         </ng-container>
+        <hr>
     </li>
   </ul>
 </div>
