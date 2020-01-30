@@ -1,4 +1,4 @@
-# IntMed challenge
+# Computer Store Rest API
 
 This project was made in two separated parts, one for backend and other for frontend. 
 
